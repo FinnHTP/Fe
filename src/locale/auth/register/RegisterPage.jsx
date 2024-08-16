@@ -32,7 +32,7 @@ const RegisterPage = () => {
               Login
             </span>
           </h2>
-          <RegisterComponent onLoginSuccess={handleRegisterSuccess} />
+          <RegisterComponent onRegisterSuccess={handleRegisterSuccess} />
           <br></br>
         </div>
       </div>
