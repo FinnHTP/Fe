@@ -1,8 +1,6 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import GoogleLoginButton from "../login/GoogleLoginButton.Component";
 
 const RegisterComponent = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState("");
@@ -85,7 +83,10 @@ const RegisterComponent = ({ onRegisterSuccess }) => {
   return (
     <form onSubmit={handleRegister} className="space-y-4 w-full">
       <div className="form-group">
-        <label htmlFor="username" className="ml-12 block text-sm font-medium text-white">
+        <label
+          htmlFor="username"
+          className="ml-12 block text-sm font-medium text-white"
+        >
           Username
         </label>
         <input
@@ -102,7 +103,10 @@ const RegisterComponent = ({ onRegisterSuccess }) => {
         )}
       </div>
       <div className="form-group">
-        <label htmlFor="password" className="ml-12 block text-sm font-medium text-white">
+        <label
+          htmlFor="password"
+          className="ml-12 block text-sm font-medium text-white"
+        >
           Password
         </label>
         <input
@@ -119,7 +123,10 @@ const RegisterComponent = ({ onRegisterSuccess }) => {
         )}
       </div>
       <div className="form-group">
-        <label htmlFor="email" className="ml-12 block text-sm font-medium text-white">
+        <label
+          htmlFor="email"
+          className="ml-12 block text-sm font-medium text-white"
+        >
           Email
         </label>
         <input
@@ -142,8 +149,6 @@ const RegisterComponent = ({ onRegisterSuccess }) => {
         >
           Register
         </button>
-        
-     
       </div>
     </form>
   );
