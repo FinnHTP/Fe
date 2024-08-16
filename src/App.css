@@ -1,0 +1,46 @@
+.toast-container {
+  position: fixed;
+  top: 60px;
+  right: -100%;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.toast-container.show {
+  right: 0;
+}
+
+.toast-container.hide {
+  right: -100%;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.game-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.game-description {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.game-description.expanded {
+  max-height: none;
+}
+
+.show-more-link {
+  color: #4a90e2;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.show-more-link:hover {
+  color: #2c3e50;
+}

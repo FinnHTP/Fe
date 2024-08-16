@@ -1,0 +1,28 @@
+[
+    {
+        "id" : 1,
+        "image" : "egs-world-of-goo-2-carousel-desktop-1920x1080-8e3cd8d02f41",
+        "name" : "World of Goo 2"
+    },
+    {
+        "id" : 2,
+        "image" : "egs-apex-legends-carousel-desktop-1920x1080-7f0eb3ae87a9",
+        "name" : "Apex Legends"
+    },
+    {
+        "id" : 3,
+        "image" : "egs-honkai-star-rail-2-4-carousel-desktop-2560x1440-01c38e805e14",
+        "name" : "Honkai: Star Rail"
+    },
+    {
+        "id" : 4,
+        "image" : "egs-ac-shadows-carousel-desktop-1248x702-1d4d804e0154",
+        "name" : "Assassin's Creed Shadoew"
+    },
+    {
+        "id" : 5,
+        "image" : "egs-borderlands-franchise-sale-carousel-desktop-1920x1080-d2729fe17966",
+        "name" : "Borderlands Franchise Sale"
+    }
+    
+]
