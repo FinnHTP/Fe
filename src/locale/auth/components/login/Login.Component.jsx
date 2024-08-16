@@ -1,7 +1,5 @@
-
 import React, { useState } from "react";
 import { jwtDecode } from "jwt-decode";
-
 
 const LoginComponent = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
@@ -71,7 +69,10 @@ const LoginComponent = ({ onLoginSuccess }) => {
   return (
     <form onSubmit={handleLogin} className="space-y-4 w-full">
       <div className="form-group">
-        <label htmlFor="username" className="block ml-12 text-sm font-medium text-gray-200">
+        <label
+          htmlFor="username"
+          className="block ml-12 text-sm font-medium text-gray-200"
+        >
           Username
         </label>
         <input
@@ -88,7 +89,10 @@ const LoginComponent = ({ onLoginSuccess }) => {
         )}
       </div>
       <div className="form-group">
-        <label htmlFor="password" className=" ml-12 block text-sm font-medium text-gray-200">
+        <label
+          htmlFor="password"
+          className=" ml-12 block text-sm font-medium text-gray-200"
+        >
           Password
         </label>
         <input
@@ -104,7 +108,7 @@ const LoginComponent = ({ onLoginSuccess }) => {
           <p className="text-red-500 text-sm mt-1">{errors.password}</p>
         )}
       </div>
-     
+
       {/* <button
         type="submit"
         className="w-4/12 ml-36 bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-md"
@@ -112,11 +116,11 @@ const LoginComponent = ({ onLoginSuccess }) => {
         Login
       </button> */}
       <button
-  type="submit"
-  className="w-4/12 ml-36 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-medium py-2 px-4 rounded-md"
->
-  Login
-</button>
+        type="submit"
+        className="w-4/12 ml-36 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-medium py-2 px-4 rounded-md"
+      >
+        Login
+      </button>
       <p className="text-center text-sm">
         <a href="#" className="text-blue-500 hover:underline">
           Forgot Your Password?
