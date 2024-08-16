@@ -26,13 +26,16 @@ const RegisterComponent = ({ onRegisterSuccess }) => {
         email,
       };
 
-      fetch("http://localhost:8080/api/v1/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(registerData),
-      })
+      fetch(
+        "https://steam-gamemanagement-75086cac80ca.herokuapp.com/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(registerData),
+        }
+      )
         .then((response) => {
           if (!response.ok) {
             throw new Error("Register failed");

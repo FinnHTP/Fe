@@ -20,13 +20,16 @@ const LoginComponent = ({ onLoginSuccess }) => {
         password,
       };
 
-      fetch("http://localhost:8080/api/v1/auth/authenticate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginData),
-      })
+      fetch(
+        "https://steam-gamemanagement-75086cac80ca.herokuapp.com/authenticate",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loginData),
+        }
+      )
         .then((response) => {
           if (!response.ok) {
             throw new Error("Login failed");
