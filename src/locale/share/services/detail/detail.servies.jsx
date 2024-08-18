@@ -9,7 +9,7 @@ export const fetchGameById = async (gameId) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/games/${gameId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/games/${gameId}`,
       {
         // headers: {
         //   Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ export const fetchGameById = async (gameId) => {
 export const getAccountbyUsername = async (token, userName) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/account/username/${userName}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/account/username/${userName}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ export const getAccountbyUsername = async (token, userName) => {
 export const getAvatar = async (accountId) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/user/${accountId}/avatar`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/user/${accountId}/avatar`,
       {
         responseType: "arraybuffer",
       }
@@ -71,7 +71,7 @@ export const AllRating = async (gameId) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/rating/${gameId}/games`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/rating/${gameId}/games`,
       {
         // headers: {
         //   Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ export const fetchRating = async (gameId) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/rating/${gameId}/avg`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/rating/${gameId}/avg`,
       {
         // headers: {
         //   Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ export const fetchRating = async (gameId) => {
 export const fetchGameSystemRequirements = async (gameId) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/gameSystemRequirement/findByGame/${gameId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/gameSystemRequirement/findByGame/${gameId}`,
       {
         // headers: {
         //   Authorization: `Bearer ${token}`,
