@@ -135,7 +135,7 @@ const Game = () => {
         toupdate the most accurate price and select the appropriate Wallet code.
       </p>
       {/* Game Detail */}
-      <div className="flex bg-customBgFreeGames justify-center px-2 mt-12 mb-12 py-2 rounded-xl">
+      <div className="flex justify-center px-2 mt-12 mb-12 py-2 rounded-xl">
         <div className="game-detail-container text-white mt-6 px-4 md:px-8">
           <div>
             <h3 className="mb-4 text-xl">Description</h3>
@@ -156,11 +156,10 @@ const Game = () => {
 
           <div className="mt-6">
             <h3 className="mt-6 mb-4 text-xl">Rating</h3>
-            <RatingGames gameId={id} />
           </div>
 
-          <div className="mt-6">
-            <h3 className="mt-6 mb-4 text-xl">System Requirements</h3>
+          <div className="mt-6 bg-customBgFreeGames rounded-lg p-3">
+            <h3 className="mt-6 mb-4 text-2xl">System Requirements</h3>
             <SystemRequirements requirements={systemRequirements} />
           </div>
         </div>

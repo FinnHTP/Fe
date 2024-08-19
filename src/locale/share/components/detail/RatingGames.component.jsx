@@ -60,16 +60,7 @@ const RatingGames = (gameId) => {
   useEffect(() => {
     getAvatarAccount(user.id);
   }, [user]);
-  return (
-    <div>
-      {ratings.map((rating) => {
-        <div className="bg-customBgBrowse w-32 h-32">
-          {/* <img src={avatarUrl} alt="" /> */}
-          <h1 className="text-white">{rating.name}</h1>
-        </div>;
-      })}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default RatingGames;

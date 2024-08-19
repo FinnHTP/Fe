@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [accountId, setAccountId] = useState(1);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const handleUpload = async () => {
     const token = localStorage.getItem("accesstoken");
     const decoded = jwtDecode(token);
-    const accountId = decoded.id;
     if (selectedFile) {
       await uploadAvatar(accountId, selectedFile);
       console.log(selectedFile);
@@ -45,8 +45,6 @@ const Header = () => {
   };
   const handleGetAvatar = async () => {
     const token = localStorage.getItem("accesstoken");
-    const decoded = jwtDecode(token);
-    const accountId = decoded.id;
     const url = await getAvatar(accountId, token);
     setAvatarUrl(url);
   };
