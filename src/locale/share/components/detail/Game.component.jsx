@@ -65,7 +65,7 @@ const Game = () => {
     if (isNaN(date.getTime())) {
       return "Ngày không hợp lệ";
     }
-    return format(date, "dd/MM/yyyy HH:mm:ss");
+    return format(date, "dd/MM/yyyy");
   };
   const handleGameTypeClick = async (gameType) => {
     try {

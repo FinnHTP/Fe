@@ -55,7 +55,7 @@ const Header = () => {
   const getAvatar = async (accountId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/user/${accountId}/avatar`,
+        `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/user/${accountId}/avatar`,
         {
           responseType: "arraybuffer",
         }
@@ -117,7 +117,6 @@ const Header = () => {
         </li>
         <li className="ml-auto mr-2 pb-2 ">
           <div class="relative">
-            <div></div>
             {avatarUrl ? (
               <img
                 src={avatarUrl}
