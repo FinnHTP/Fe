@@ -25,7 +25,7 @@ import Toast from "./locale/share/components/common/Toast.component.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-customBg">
+      <div className="bg-customBg font-mono">
         <Header></Header>
         <div className="App  mx-auto container">
           <div className="flex flex-col min-h-screen">

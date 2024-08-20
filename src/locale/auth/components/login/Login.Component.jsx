@@ -19,7 +19,6 @@ const LoginComponent = ({ onLoginSuccess }) => {
         username,
         password,
       };
-
       fetch(
         "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/v1/auth/authenticate",
         {

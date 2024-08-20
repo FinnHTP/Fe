@@ -20,7 +20,7 @@ module.exports = {
         customTextFreeGames: "#B1B1B3",
         customBgFreeGames2: "#5BB8F9",
         customTextSales: "#ACACAD",
-        customLoginBg:"rgb(24,27,32)",
+        customLoginBg: "rgb(24,27,32)",
       },
       fontSize: {
         sxl: "1.2rem",
@@ -35,6 +35,11 @@ module.exports = {
           xl: "5rem",
         },
         customLoginBg: "rgb(38,36,36)",
+      },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        serif: ["Merriweather", "serif"],
+        mono: ["Fira Code", "monospace"],
       },
     },
   },

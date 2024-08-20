@@ -148,7 +148,7 @@ const Game = ({ priceRange }) => {
               />
               <div className="pt-4">
                 <p className="text-customTypeEdition text-sm">Edition</p>
-                <div className="font-medium text-sxl text-white mb-2">
+                <div className="font-medium text-base text-white mb-2">
                   {game.name}
                 </div>
               </div>
