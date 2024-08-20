@@ -7,6 +7,7 @@ import DealsOfWeek from "../components/store/DealsOfWeek.component";
 import FreeGame from "../components/store/FreeGame.component";
 import GridGameType from "../components/store/GridGameType.component";
 import TypeItemStore from "../components/store/TypeItemStore.component";
+import ChatBox from "../../chatbox";
 
 const StorePage = () => {
   return (
@@ -24,6 +25,7 @@ const StorePage = () => {
           <TypeItemStore />
         </div>
       </div>
+      <ChatBox />
     </div>
   );
 };
