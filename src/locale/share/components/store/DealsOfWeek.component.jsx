@@ -77,7 +77,7 @@ const DealsOfWeek = () => {
           </div>
         </div>
       ))}
-      <div>
+      <div className="mt-8">
         <img
           className="rounded-2xl cursor-pointer hover:opacity-80"
           src="image/top-bg-game/en-sales-specials-dotw-breaker-asset-1920x1080-1313ee288796.jpg"
