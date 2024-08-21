@@ -38,6 +38,7 @@ const LoginComponent = ({ onLoginSuccess }) => {
         .then((data) => {
           const token = data.token;
           localStorage.setItem("username", username);
+          sessionStorage.setItem("username", username);
           localStorage.setItem("accesstoken", token);
           const decodedToken = jwtDecode(token);
           onLoginSuccess(decodedToken);
