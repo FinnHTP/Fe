@@ -71,7 +71,7 @@ const ButtonBuyGame = () => {
           };
           console.log(accountBalance);
           const updateBalanceResponse = await axios.put(
-            `https://steam-gamemanagement-75086cac80ca.herokuapp.com/${accountId}/accountBalance`,
+            `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/account/${accountId}/accountBalance`,
             updatedAccount,
             {
               headers: {
