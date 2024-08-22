@@ -21,12 +21,6 @@ export const getAllGames = async () => {
 export const getAllGameTypes = async () => {
   const response = await axios.get(
     "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/gametypes",
-    {
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${token}`,
-      // },
-    }
   );
   console.log(response.data);
   const data =

@@ -31,7 +31,7 @@ const ButtonBuyGame = () => {
     if (token) {
       try {
         const responseAccount = await axios.get(
-          `http://localhost:8080/api/account/username/${username}`,
+          `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/account/username/${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const ButtonBuyGame = () => {
         }
 
         const response = await axios.post(
-          `http://localhost:8080/api/orders`,
+          `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/orders`,
           order,
           {
             headers: {
@@ -71,7 +71,7 @@ const ButtonBuyGame = () => {
           };
           console.log(accountBalance);
           const updateBalanceResponse = await axios.put(
-            `http://localhost:8080/api/account/${accountId}/accountBalance`,
+            `https://steam-gamemanagement-75086cac80ca.herokuapp.com/${accountId}/accountBalance`,
             updatedAccount,
             {
               headers: {
