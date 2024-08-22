@@ -1,7 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchGameById } from "../../services/detail/detail.servies";
 
 const ButtonBuyGame = () => {
@@ -12,11 +12,6 @@ const ButtonBuyGame = () => {
   const [game, setGame] = useState({});
   const [gameId, setGameId] = useState(0);
   const { id } = useParams();
-  const navigator = useNavigate();
-
-  const navConfirm = (id) => {
-    navigator(`/confirm-purchase/${id}`);
-  };
 
   const getGameById = async (gameId) => {
     try {
@@ -103,7 +98,7 @@ const ButtonBuyGame = () => {
     <div>
       <div
         className="bg-customBgBrowse cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-500 inline-block mt-5"
-        onClick={() => navConfirm(id)}
+        onClick={buyGame}
       >
         Buy Game
       </div>

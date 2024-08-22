@@ -63,43 +63,43 @@ export const getAvatar = async (accountId) => {
 };
 
 export const AllRating = async (gameId) => {
-  //   const token = localStorage.getItem("accesstoken");
-  //   if (!token) {
-  //     console.error("Không có token được tìm thấy");
-  //     return;
-  //   }
+  const token = localStorage.getItem("accesstoken");
+  if (!token) {
+    console.error("Không có token được tìm thấy");
+    return;
+  }
 
   try {
     const response = await axios.get(
       `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/rating/${gameId}/games`,
       {
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
+    console.log("Games of User Rating:", response.data);
     return response.data;
   } catch (error) {
     console.error("Fail To Request:", error);
   }
 };
 export const fetchRating = async (gameId) => {
-  //   const token = localStorage.getItem("accesstoken");
-  //   if (!token) {
-  //     console.error("Không có token được tìm thấy");
-  //     return;
-  //   }
+  const token = localStorage.getItem("accesstoken");
+  if (!token) {
+    console.error("Không có token được tìm thấy");
+    return;
+  }
 
   try {
     const response = await axios.get(
       `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/rating/${gameId}/avg`,
       {
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
-    console.log("Rating Games: ", response.data);
     return response.data;
   } catch (error) {
     console.error("Fail To Request:", error);

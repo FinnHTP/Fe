@@ -38,7 +38,14 @@ const LoginComponent = ({ onLoginSuccess }) => {
         .then((data) => {
           const token = data.token;
           localStorage.setItem("username", username);
-          sessionStorage.setItem("username", username);
+          const user = {
+            access_token: token,
+            role: "ADMIN",
+            status: "success",
+            token_type: "Bearer",
+            username: username,
+          };
+          sessionStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("accesstoken", token);
           const decodedToken = jwtDecode(token);
           onLoginSuccess(decodedToken);

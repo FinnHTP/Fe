@@ -10,6 +10,7 @@ import GameSystemRequirementPage from "./locale/admin/gamesystemrequirement/Game
 import GroupPage from "./locale/admin/group/GroupPage";
 import KeyCodePage from "./locale/admin/keycode/KeyCodePage";
 import OrderPage from "./locale/admin/order/OrderPage";
+import ConfirmPurchase from "./locale/share/components/confirmpurchase/ConfirmPurchase.component.jsx";
 import RankAccountPage from "./locale/admin/rankaccount/RankAccountPage";
 import RolePage from "./locale/admin/role/RolePage";
 import GamePage from "./locale/admin/game/GamePage";
@@ -42,7 +43,11 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<DetailPage />} />
-
+                <Route path="/confirm-purchase" element={<ConfirmPurchase />} />
+                <Route
+                  path="/confirm-purchase/:id"
+                  element={<ConfirmPurchase />}
+                />
                 {/* Admin */}
                 <Route path="/api/game" element={<GamePage />} />
                 <Route path="/api/account" element={<AccountPage />} />

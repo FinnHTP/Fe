@@ -156,6 +156,8 @@ const Game = () => {
 
           <div className="mt-6">
             <h3 className="mt-6 mb-4 text-xl">Rating</h3>
+            <StarRating rating={rating} />
+            <RatingGames id={id} />
           </div>
 
           <div className="mt-6 bg-customBgFreeGames rounded-lg p-3">

@@ -4,28 +4,29 @@ import {
   getAccountbyUsername,
   getAvatar,
 } from "../../services/detail/detail.servies";
+import StarRating from "./StarRating.component";
+import StarRatingUser from "./StarRatingUser.component";
 
-const RatingGames = (gameId) => {
+const RatingGames = ({ id }) => {
   const [ratings, setRatings] = useState([]);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [user, setUser] = useState({});
-
-  const getAvatarAccount = async (id) => {
+  // const getAvatarAccount = async (id) => {
+  //   try {
+  //     const data = await getAvatar(gameId);
+  //     console.log("Avatar: ", data);
+  //     if (data !== null) {
+  //       setAvatarUrl(data);
+  //     } else {
+  //       console.error("Dữ liệu trả về không phải là mảng:", data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Lỗi khi lấy dữ liệu:", error);
+  //   }
+  // };
+  const fetchAllRating = async () => {
     try {
-      const data = await getAvatar(gameId);
-      console.log("Avatar: ", data);
-      if (data !== null) {
-        setAvatarUrl(data);
-      } else {
-        console.error("Dữ liệu trả về không phải là mảng:", data);
-      }
-    } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu:", error);
-    }
-  };
-  const fetchAllRating = async (gameId) => {
-    try {
-      const data = await AllRating(gameId);
+      const data = await AllRating(id);
       console.log("Ratings: ", data);
       if (data !== null) {
         setRatings(data);
@@ -54,13 +55,33 @@ const RatingGames = (gameId) => {
     const username = localStorage.getItem("username");
     if (token) {
       getUserByUsername(token, username);
-      fetchAllRating(gameId);
+      fetchAllRating();
     }
-  }, []);
-  useEffect(() => {
-    getAvatarAccount(user.id);
-  }, [user]);
-  return <div></div>;
+  }, [id]);
+
+  // useEffect(() => {
+  //   getAvatarAccount(user.id);
+  // }, [user]);
+  return (
+    <div>
+      <div className="grid grid-cols-4 gap-4">
+        {ratings.map((rt) => (
+          <div className="bg-customFooterBg p-3">
+            <p className="text-white">{rt.account.username}</p>{" "}
+            <span className="text-customTextDiscount text-[0.75rem]">
+              ({rt.account.email})
+            </span>
+            <StarRatingUser rating={rt.rating} />
+            <hr />
+            <p className="mt-3">{rt.content}</p>
+            <p>
+              Posted date: <span>{rt.date}</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RatingGames;
