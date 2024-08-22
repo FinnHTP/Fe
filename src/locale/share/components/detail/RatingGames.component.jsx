@@ -66,7 +66,7 @@ const RatingGames = ({ id }) => {
     <div>
       <div className="grid grid-cols-4 gap-4">
         {ratings.map((rt) => (
-          <div className="bg-customFooterBg p-3">
+          <div className="bg-customLoginBg p-3 rounded">
             <p className="text-white">{rt.account.username}</p>{" "}
             <span className="text-customTextDiscount text-[0.75rem]">
               ({rt.account.email})
@@ -74,7 +74,7 @@ const RatingGames = ({ id }) => {
             <StarRatingUser rating={rt.rating} />
             <hr />
             <p className="mt-3">{rt.content}</p>
-            <p>
+            <p className="text-[0.7rem] text-right mt-16">
               Posted date: <span>{rt.date}</span>
             </p>
           </div>

@@ -7,7 +7,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [accountId, setAccountId] = useState(1);
-
+  const [isLogin, SetIsLogin] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const handleUpload = async () => {
     const token = localStorage.getItem("accesstoken");
@@ -17,6 +17,7 @@ const Header = () => {
       console.log(selectedFile);
     }
   };
+
   const uploadAvatar = async (accountId, file) => {
     const token = localStorage.getItem("accesstoken");
 
@@ -77,7 +78,11 @@ const Header = () => {
   useEffect(() => {}, []);
 
   useEffect(() => {
-    handleGetAvatar();
+    const token = localStorage.getItem("accesstoken");
+    if (token) {
+      handleGetAvatar();
+      SetIsLogin(true);
+    }
   }, []);
 
   return (
@@ -117,22 +122,34 @@ const Header = () => {
         </li>
         <li className="ml-auto mr-2 pb-2 ">
           <div class="relative">
-            {avatarUrl ? (
-              <img
-                src={avatarUrl}
-                alt="User Avatar"
-                width={60}
-                style={{ borderRadius: "50%" }}
-              />
+            {!isLogin ? (
+              <button
+                className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+            ) : avatarUrl ? (
+              <>
+                <img
+                  src={avatarUrl}
+                  alt="User Avatar"
+                  width={60}
+                  style={{ borderRadius: "50%" }}
+                />
+                <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+              </>
             ) : (
-              <img
-                src={"https://cdn-icons-png.flaticon.com/128/149/149071.png"}
-                alt="User Avatar"
-                width={60}
-                style={{ borderRadius: "50%" }}
-              />
+              <>
+                <img
+                  src={"https://cdn-icons-png.flaticon.com/128/149/149071.png"}
+                  alt="User Avatar"
+                  width={60}
+                  style={{ borderRadius: "50%" }}
+                />
+                <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+              </>
             )}
-            <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
           </div>
         </li>
       </ul>

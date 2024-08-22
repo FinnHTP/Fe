@@ -87,7 +87,9 @@ const Game = () => {
   return (
     <div className="mx-5">
       <div className="flex flex-wrap gap-4">
-        <div className="text-white">Overview</div>
+        <div className="text-white border-b-4 border-customCouponBg">
+          Overview
+        </div>
         <div className="text-white">Rating</div>
       </div>
       <h1 className="text-white text-4xl mt-3">{game.name || "Loading..."}</h1>{" "}
@@ -156,7 +158,16 @@ const Game = () => {
 
           <div className="mt-6">
             <h3 className="mt-6 mb-4 text-xl">Rating</h3>
-            <StarRating rating={rating} />
+            <div className="flex justify-between">
+              <div>
+                <StarRating rating={rating} />
+              </div>
+              <div>
+                <span className="text-customBgFreeGames2 cursor-pointer">
+                  View More
+                </span>
+              </div>
+            </div>
             <RatingGames id={id} />
           </div>
 
