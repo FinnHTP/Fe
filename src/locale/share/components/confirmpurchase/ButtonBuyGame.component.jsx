@@ -100,7 +100,7 @@ const ButtonBuyGame = () => {
         className="bg-customBgBrowse cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-500 inline-block mt-5"
         onClick={buyGame}
       >
-        Buy Game
+        Confirm
       </div>
     </div>
   );
