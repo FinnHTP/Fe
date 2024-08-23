@@ -9,16 +9,16 @@ const SystemRequirements = ({ requirements }) => {
 
   return (
     <div className="system-requirements">
-      <table className="w-full table-auto border-collapse border border-gray-200">
+      <table className="w-full table-auto border-collapse">
         <thead>
           <tr>
-            <th className="border border-gray-300 p-2">Minimum</th>
-            <th className="border border-gray-300 p-2">Recommended</th>
+            <th className="p-2">Minimum</th>
+            <th className="p-2">Recommended</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="border border-gray-300 p-4">
+            <td className="p-4">
               <ul>
                 <li>
                   <span className="text-gray-400">OS Version:</span>
@@ -47,7 +47,7 @@ const SystemRequirements = ({ requirements }) => {
                 </li>
               </ul>
             </td>
-            <td className="border border-gray-300 p-4">
+            <td className=" p-4">
               <ul>
                 <li>
                   <span className="text-gray-400">OS Version:</span>

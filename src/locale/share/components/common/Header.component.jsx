@@ -87,10 +87,18 @@ const Header = () => {
 
   return (
     <div>
-      <ul className="flex bg-customHeaderBg p-3 px-4">
+      <ul className="flex bg-customHeaderBg p-3 px-4 h-auto">
+        <li className="mr-6 ms-2">
+          <button
+            className="text-lg my-auto text-gray-100 hover:text-yellow-500"
+            onClick={() => navigate("/store")}
+          >
+            <img src="./R.png" alt="" className="w-12" />
+          </button>
+        </li>
         <li className="mr-6 mt-2 ms-2">
           <button
-            className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+            className="text-lg  my-auto text-gray-100 hover:text-yellow-500"
             onClick={() => navigate("/store")}
           >
             Store
@@ -98,7 +106,7 @@ const Header = () => {
         </li>
         <li className="mr-6 mt-2 ms-2">
           <button
-            className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+            className="text-lg  my-auto text-gray-100 hover:text-yellow-500"
             onClick={() => navigate("/category")}
           >
             Category
@@ -106,7 +114,7 @@ const Header = () => {
         </li>
         <li className="mr-6 mt-2 ms-2">
           <button
-            className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+            className="text-lg  my-auto text-gray-100 hover:text-yellow-500"
             onClick={() => navigate("/forum")}
           >
             Forum
@@ -114,7 +122,7 @@ const Header = () => {
         </li>
         <li className="mr-6 mt-2 ms-2">
           <button
-            className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+            className="text-lg  my-auto text-gray-100 hover:text-yellow-500"
             onClick={() => navigate("/contact")}
           >
             Contact
@@ -124,7 +132,7 @@ const Header = () => {
           <div class="relative">
             {!isLogin ? (
               <button
-                className="text-lg mt-1 text-gray-100 hover:text-yellow-500"
+                className="text-lg  my-auto text-gray-100 hover:text-yellow-500"
                 onClick={() => navigate("/login")}
               >
                 Login
@@ -134,8 +142,10 @@ const Header = () => {
                 <img
                   src={avatarUrl}
                   alt="User Avatar"
-                  width={60}
+                  width={44}
                   style={{ borderRadius: "50%" }}
+                  className="cursor-pointer"
+                  onClick={() => navigate("/profile")}
                 />
                 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </>
@@ -144,8 +154,10 @@ const Header = () => {
                 <img
                   src={"https://cdn-icons-png.flaticon.com/128/149/149071.png"}
                   alt="User Avatar"
-                  width={60}
+                  width={44}
                   style={{ borderRadius: "50%" }}
+                  className="cursor-pointer"
+                  onClick={() => navigate("/profile")}
                 />
                 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </>

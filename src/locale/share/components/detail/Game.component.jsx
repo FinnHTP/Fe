@@ -87,10 +87,10 @@ const Game = () => {
   return (
     <div className="mx-5">
       <div className="flex flex-wrap gap-4">
-        <div className="text-white border-b-4 border-customCouponBg">
+        <div className="text-white cursor-pointer border-b-4   border-customCouponBg">
           Overview
         </div>
-        <div className="text-white">Rating</div>
+        <div className="text-white cursor-pointer">Rating</div>
       </div>
       <h1 className="text-white text-4xl mt-3">{game.name || "Loading..."}</h1>{" "}
       <StarRating rating={rating} />
@@ -171,8 +171,10 @@ const Game = () => {
             <RatingGames id={id} />
           </div>
 
+          <h3 className="mt-6 mb-4 text-2xl">
+            {game.name} System Requirements
+          </h3>
           <div className="mt-6 bg-customBgFreeGames rounded-lg p-3">
-            <h3 className="mt-6 mb-4 text-2xl">System Requirements</h3>
             <SystemRequirements requirements={systemRequirements} />
           </div>
         </div>

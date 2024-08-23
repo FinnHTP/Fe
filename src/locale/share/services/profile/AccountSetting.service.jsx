@@ -102,7 +102,7 @@ export const recharge = async (amount, token) => {
       window.location.href = responseUrl;
       console.log(responseUrl);
       const resultPayment = await axios.post(
-        `http://localhost:8080/api/payment/save-payment?${queryString}`,
+        `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/payment/save-payment?${queryString}`,
 
         {
           headers: {
