@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -11,8 +10,9 @@ import {
   joinGroup,
   leaveGroup,
   createGroup,
-  fetchJoinedGroups, // Import fetchJoinedGroups
-} from "../../services/group/Group.service"
+  fetchJoinedGroups,
+  getNewBlogsToday,
+} from "../../services/group/Group.service";
 
 const GroupComponent = () => {
   const [games, setGames] = useState([]);
@@ -21,6 +21,7 @@ const GroupComponent = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [avatarGroupUrl, setAvatarGroupUrl] = useState({});
   const [avatars, setAvatars] = useState({});
+  const [newBlogsToday, setNewBlogsToday] = useState({});
   const [status, setStatus] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -43,6 +44,9 @@ const GroupComponent = () => {
 
         const groupsData = await listAllGroups(token);
         setGroups(groupsData);
+
+        
+        await loadAvatarsAndBlogs(groupsData, token);
       } catch (error) {
         console.error("Error loading data:", error);
       }
@@ -51,32 +55,31 @@ const GroupComponent = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const loadAvatars = async () => {
-      if (groups.length > 0) {
-        const avatarPromises = groups.map(async (group) => {
-          const groupAvatars = await getGroupAvatars(group.id);
-          const avatarUrls = await Promise.all(groupAvatars.map(member => getAvatar(member.id)));
-          
-          setAvatars(prevAvatars => ({
-            ...prevAvatars,
-            [group.id]: avatarUrls,
-          }));
+  const loadAvatarsAndBlogs = async (groupsData, token) => {
+    if (groupsData.length > 0) {
+      const avatarPromises = groupsData.map(async (group) => {
+        const groupAvatars = await getGroupAvatars(group.id);
+        const avatarUrls = await Promise.all(groupAvatars.map(member => getAvatar(member.id)));
 
-          const avatarGroupUrl = await getAvatarOfGroup(group.id);
-          setAvatarGroupUrl(prev => ({ ...prev, [group.id]: avatarGroupUrl }));
-        });
+        setAvatars(prevAvatars => ({
+          ...prevAvatars,
+          [group.id]: avatarUrls,
+        }));
 
-        await Promise.all(avatarPromises);
+        const avatarGroupUrl = await getAvatarOfGroup(group.id);
+        setAvatarGroupUrl(prev => ({ ...prev, [group.id]: avatarGroupUrl }));
 
-        const token = localStorage.getItem("accesstoken");
-        const joinedGroupIds = await fetchJoinedGroups(groups, token);
-        setJoinedGroups(joinedGroupIds);
-      }
-    };
+ 
+        const newBlogsCount = await getNewBlogsToday(group.id);
+        setNewBlogsToday(prev => ({ ...prev, [group.id]: newBlogsCount }));
+      });
 
-    loadAvatars();
-  }, [groups]);
+      await Promise.all(avatarPromises);
+
+      const joinedGroupIds = await fetchJoinedGroups(groupsData, token);
+      setJoinedGroups(joinedGroupIds);
+    }
+  };
 
   const handleSearch = async () => {
     if (searchTerm.trim() === "") {
@@ -105,7 +108,7 @@ const GroupComponent = () => {
     try {
       await joinGroup(groupId, token);
       await fetchJoinedGroups();
-      alert("Tham gia nhóm thành công");
+      
     } catch (error) {
       console.error("Lỗi khi tham gia nhóm:", error);
       alert("Tham gia nhóm thất bại");
@@ -131,7 +134,8 @@ const GroupComponent = () => {
   };
 
   const fetchBlogsByGroup = (groupId) => {
-    navigate(`/blogs/group/${groupId}`);
+    const isJoined = joinedGroups.includes(groupId);
+    navigate(`/blogs/group/${groupId}`, { state: { isJoined } });
   };
 
   const handleCreateGroup = async () => {
@@ -285,10 +289,30 @@ const GroupComponent = () => {
                               </span>
                             )}
                           </div>
+                          <div className="flex items-center  mt-2 text-sm">
+                            {group.status ? (
+                              <>
+                                <i className="fas fa-globe text-gray-200"></i>
+                                <span className="text-gray-200 ml-2">Nhóm công khai</span>
+                              </>
+                            ) : (
+                              <>
+                                <i className="fas fa-lock text-gray-200"></i>
+                                <span className="text-gray-200 ml-2">Nhóm riêng tư</span>
+                              </>
+                            )}
+                          </div>
+                         
+                 
+                            <div className="text-gray-200 mt-2">
+                              Có {newBlogsToday[group.id]} bài viết mới hôm nay
+                            </div>
+                        
                         </div>
                       </div>
+
                       <div className="mt-4 text-right">
-                        {joinedGroups.includes(group.id) ? (
+                        {group.status || joinedGroups.includes(group.id) ? (
                           <>
                             <button
                               className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
@@ -296,13 +320,16 @@ const GroupComponent = () => {
                             >
                               Chi tiết
                             </button>
-                            <button
-                              className="px-4 py-2 bg-red-500 text-white rounded-md"
-                              onClick={() => handleLeaveGroup(group.id)}
-                            >
-                              Thoát nhóm
-                            </button>
                           </>
+                        ) : null}
+
+                        {joinedGroups.includes(group.id) ? (
+                          <button
+                            className="px-4 py-2 bg-red-500 text-white rounded-md"
+                            onClick={() => handleLeaveGroup(group.id)}
+                          >
+                            Thoát nhóm
+                          </button>
                         ) : (
                           <button
                             className="px-4 py-2 bg-yellow-500 text-white rounded-md"
@@ -312,6 +339,7 @@ const GroupComponent = () => {
                           </button>
                         )}
                       </div>
+
                     </div>
                   ))
                 ) : (

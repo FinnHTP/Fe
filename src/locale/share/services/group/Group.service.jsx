@@ -207,3 +207,15 @@ export const fetchJoinedGroups = async (groups, token) => {
   const joinedGroupIds = await checkJoinedGroups(groups, token);
   return joinedGroupIds;
 };
+
+export const getNewBlogsToday = async (groupId, token) => {
+  try {
+    const response = await axios.get(`http://localhost:8080/api/group/${groupId}/blogday`, {
+    
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch new blogs count:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+};

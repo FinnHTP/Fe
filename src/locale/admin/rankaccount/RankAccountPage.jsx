@@ -1,9 +1,10 @@
 import React from 'react';
+import RankAccountComponent from '../component/rankaccount/Rankaccount.Component';
 
 const RankAccountPage = () => {
     return (
         <div>
-            API RankAccount
+            <RankAccountComponent/>
         </div>
     );
 };
