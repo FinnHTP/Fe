@@ -20,11 +20,14 @@ export const listAllGames = async (token) => {
 
 export const listAllGroups = async (token) => {
   try {
-    const response = await axios.get("http://localhost:8080/api/group", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Lỗi khi gửi yêu cầu:", error);
@@ -72,7 +75,7 @@ export const getAvatar = async (accountId) => {
 export const getAvatarOfGroup = async (groupId) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/group/${groupId}/image`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
       {
         responseType: "arraybuffer",
       }
@@ -97,7 +100,7 @@ export const uploadAvatarGroup = async (groupId, file, token) => {
 
   try {
     const response = await axios.post(
-      `http://localhost:8080/api/group/${groupId}/image`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
       formData,
       {
         headers: {
@@ -136,7 +139,7 @@ export const checkJoinedGroups = async (groups, token) => {
   try {
     const joinedGroupsPromises = groups.map(async (group) => {
       const response = await axios.get(
-        `http://localhost:8080/api/group/${group.id}/isUserJoined`,
+        `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${group.id}/isUserJoined`,
         {
           params: { accountId },
           headers: {
@@ -161,7 +164,7 @@ export const joinGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `http://localhost:8080/api/group/joinGroup`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/joinGroup`,
       { accountId, groupId },
       {
         headers: {
@@ -182,7 +185,7 @@ export const leaveGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `http://localhost:8080/api/group/leaveGroup`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/leaveGroup`,
       { accountId, groupId },
       {
         headers: {
@@ -215,7 +218,7 @@ export const createGroup = async (
 
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/group",
+      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group",
       formData,
       {
         headers: {
@@ -237,12 +240,16 @@ export const fetchJoinedGroups = async (groups, token) => {
 
 export const getNewBlogsToday = async (groupId, token) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/group/${groupId}/blogday`, {
-    
-    });
+    const response = await axios.get(
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/blogday`,
+      {}
+    );
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch new blogs count:", error.response ? error.response.data : error.message);
+    console.error(
+      "Failed to fetch new blogs count:",
+      error.response ? error.response.data : error.message
+    );
     throw error;
   }
 };

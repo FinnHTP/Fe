@@ -20,10 +20,9 @@ import LoginPage from "./locale/auth/login/LoginPage.jsx";
 import RegisterPage from "./locale/auth/register/RegisterPage.jsx";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
 import GroupPageUser from "./locale/share/group/GroupPage.jsx";
-import {jwtDecode} from "jwt-decode"; 
-import React, { Fragment, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
 
 import GroupComponent from "./locale/share/components/group/Group.component";
 import BlogComponent from "./locale/share/components/group/Blog.Component";
@@ -49,14 +48,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('Is Authenticated:', isAuthenticated);
-    console.log('User Roles:', userRoles);
-  
+    console.log("Is Authenticated:", isAuthenticated);
+    console.log("User Roles:", userRoles);
   }, [isAuthenticated, userRoles]);
 
   const checkLogin = () => {
     const token = localStorage.getItem("accesstoken");
-  
+
     if (!token) {
       console.error("Not logged in yet");
       setIsAuthenticated(false);
@@ -64,8 +62,8 @@ function App() {
       try {
         const decodedToken = jwtDecode(token);
         setIsAuthenticated(true);
-        setUserRoles(decodedToken.roles[0]); 
-        console.log('Decoded Token Roles:', decodedToken.roles[0]);
+        setUserRoles(decodedToken.roles[0]);
+        console.log("Decoded Token Roles:", decodedToken.roles[0]);
       } catch (error) {
         console.error("Invalid token", error);
         setIsAuthenticated(false);
@@ -73,15 +71,17 @@ function App() {
     }
     setCheckingAuth(false);
   };
-  
+
   return (
     <BrowserRouter>
       <div className="bg-customBg font-mono">
-        <div className="App  mx-auto container">
-        {window.location.pathname !== "/404" ? <Header></Header> : ""}
+        {window.location.pathname !== "/404" && <Header />}
         <div
           className={`App mx-auto ${
-            window.location.pathname === "/404" ? "" : "container"
+            window.location.pathname === "/404" ||
+            window.location.pathname === "/profile"
+              ? ""
+              : "container"
           }`}
         >
           <div className="flex flex-col min-h-screen">
@@ -91,7 +91,7 @@ function App() {
                 {/* Shared */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route path="" element={<StorePage />} />
+                <Route path="/" element={<StorePage />} />
                 <Route path="/store" element={<StorePage />} />
                 <Route path="/profile/*" element={<ProfilePage />} />
                 <Route path="/forum" element={<ForumPage />} />
@@ -117,6 +117,7 @@ function App() {
                 <Route path="/api/order" element={<OrderPage />} />
                 <Route path="/api/rankaccount" element={<RankAccountPage />} />
                 <Route path="/api/role" element={<RolePage />} />
+                <Route path="/api/gametype" element={<GameTypePage />} />
                 {/* Partner */}
                 <Route path="/pt/game" element={<RolePage />} />
                 <Route path="/pt/account" element={<RolePage />} />
@@ -124,8 +125,8 @@ function App() {
             </main>
           </div>
         </div>
-        {/* <Toast></Toast> */}
-        <Footer></Footer>
+        {/* <Toast /> */}
+        <Footer />
       </div>
     </BrowserRouter>
   );
