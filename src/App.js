@@ -19,15 +19,65 @@ import Footer from "./locale/share/components/common/Footer.component.jsx";
 import LoginPage from "./locale/auth/login/LoginPage.jsx";
 import RegisterPage from "./locale/auth/register/RegisterPage.jsx";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
-
 import GroupPageUser from "./locale/share/group/GroupPage.jsx";
+import {jwtDecode} from "jwt-decode"; 
+import React, { Fragment, useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+
+
+import GroupComponent from "./locale/share/components/group/Group.component";
+import BlogComponent from "./locale/share/components/group/Blog.Component";
+import BlogPublicComponent from "./locale/share/components/group/BlogPublic.Component";
+import RoleBasedRoute from "./locale/auth/services/decentralized/RoleBasedRoute";
+import UnauthorizedPage from "./locale/auth/services/decentralized/UnauthorizedPage";
+import NotFoundPage from "./locale/auth/decentralized/Page404.Component";
+import GameTypePage from "./locale/admin/gametype/GameTypePage";
+
+import Chart from "./locale/admin/component/stat/Chart.Component";
+import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
+import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
 import Toast from "./locale/share/components/common/Toast.component.jsx";
 import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [userRoles, setUserRoles] = useState([]);
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  useEffect(() => {
+    console.log('Is Authenticated:', isAuthenticated);
+    console.log('User Roles:', userRoles);
+  
+  }, [isAuthenticated, userRoles]);
+
+  const checkLogin = () => {
+    const token = localStorage.getItem("accesstoken");
+  
+    if (!token) {
+      console.error("Not logged in yet");
+      setIsAuthenticated(false);
+    } else {
+      try {
+        const decodedToken = jwtDecode(token);
+        setIsAuthenticated(true);
+        setUserRoles(decodedToken.roles[0]); 
+        console.log('Decoded Token Roles:', decodedToken.roles[0]);
+      } catch (error) {
+        console.error("Invalid token", error);
+        setIsAuthenticated(false);
+      }
+    }
+    setCheckingAuth(false);
+  };
+  
   return (
     <BrowserRouter>
       <div className="bg-customBg font-mono">
+        <div className="App  mx-auto container">
         {window.location.pathname !== "/404" ? <Header></Header> : ""}
         <div
           className={`App mx-auto ${
@@ -74,8 +124,8 @@ function App() {
             </main>
           </div>
         </div>
-        <Toast></Toast>
-        {window.location.pathname !== "/404" ? <Footer></Footer> : ""}
+        {/* <Toast></Toast> */}
+        <Footer></Footer>
       </div>
     </BrowserRouter>
   );

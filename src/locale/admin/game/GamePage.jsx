@@ -1,9 +1,10 @@
 import React from 'react';
+import GameComponent from '../component/game/Game.Component';
 
 const GamePage = () => {
     return (
         <div>
-            API Game
+         <GameComponent/>
         </div>
     );
 };
