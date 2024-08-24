@@ -36,6 +36,8 @@ import GameTypePage from "./locale/admin/gametype/GameTypePage";
 import Chart from "./locale/admin/component/stat/Chart.Component";
 import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
 import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
+import Toast from "./locale/share/components/common/Toast.component.jsx";
+import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -75,12 +77,17 @@ function App() {
   return (
     <BrowserRouter>
       <div className="bg-customBg font-mono">
-
-        <Header></Header>
         <div className="App  mx-auto container">
+        {window.location.pathname !== "/404" ? <Header></Header> : ""}
+        <div
+          className={`App mx-auto ${
+            window.location.pathname === "/404" ? "" : "container"
+          }`}
+        >
           <div className="flex flex-col min-h-screen">
             <main className="flex-grow">
               <Routes>
+                <Route path="/404" element={<BackUpUI />} />
                 {/* Shared */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
@@ -97,6 +104,7 @@ function App() {
                   path="/confirm-purchase/:id"
                   element={<ConfirmPurchase />}
                 />
+
                 {/* Admin */}
                 <Route path="/api/game" element={<GamePage />} />
                 <Route path="/api/account" element={<AccountPage />} />
@@ -118,194 +126,6 @@ function App() {
         </div>
         {/* <Toast></Toast> */}
         <Footer></Footer>
-
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            {/* Shared */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="" element={<StorePage />} />
-            <Route path="/store" element={<StorePage/>} />
-            <Route path="/profile/*" element={<ProfilePage />} />
-            <Route path="/forum" element={<ForumPage />} />
-            <Route path="/group" element={<GroupPageUser />} />
-            <Route path="/blogs/public" element={<BlogPublicComponent/>} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/category" element={<CategoryPage />} />
-            <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/forum" element={<ForumPage />} />
-            <Route path="/group" element={<GroupComponent />} />
-            <Route path="/blogs/group/:groupId" element={<BlogComponent />} />
-            <Route path="/commentblog/blog/:id" element={<BlogComponent />} />
-            <Route path="/unauthorized" element={<UnauthorizedPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-
-
-            {/* Admin */}
-
-            <Route path="/admin/game" element={<GamePage/>} />
-            <Route
-              path="/admin/game"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <GamePage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-<Route path="/admin/gamesystem" element={<GameSystemRequirementPage/>} />
-            <Route
-              path="/admin/gamesystem"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <GameSystemRequirementPage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-
-  <Route path="/admin/gametypes" element={<GameTypePage/>} />
-  <Route
-              path="/admin/gametypes"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <GameTypePage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-  <Route path="/admin/keycodes" element={<KeyCodePage/>} />
-  <Route
-              path="/admin/keycodes"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <KeyCodePage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-
-  <Route path="/admin/order" element={<OrderPage/>} />
-  <Route
-              path="/admin/order"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <OrderPage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-  <Route path="/admin/chart" element={<Chart/>} />
-  <Route
-              path="/admin/chart"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <Chart/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-
-
-
-
-  <Route path="/chartdetail" element={<ChartDetail/>} />
-  <Route
-              path="/chartdetail"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <ChartDetail/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-  <Route path="/admin/rankaccount" element={<RankAccountPage/>} />
-  <Route
-              path="/admin/rankaccount"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <RankAccountPage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-
-
-  <Route path="/admin/group" element={<GroupPage/>} />
-  <Route
-              path="/admin/group"
-              element={
-                isAuthenticated ? (
-                  <RoleBasedRoute isAuthenticated={isAuthenticated} userRoles={userRoles} allowedRoles={['ADMIN']}>
-                    <GroupPage/>
-                  </RoleBasedRoute>
-                ) : (
-                  <Navigate to="/unauthorized" />
-                )
-              }
-            />
-
-
-
-
-
-            <Route path="/api/game" element={<GamePage />} />
-            <Route path="/api/account" element={<AccountPage />} />
-            <Route
-              path="/api/gamesystem"
-              element={<GameSystemRequirementPage />}
-            />
-            <Route path="/api/group" element={<GroupPage />} />
-            <Route path="/api/keycode" element={<KeyCodePage />} />
-            <Route path="/api/order" element={<OrderPage />} />
-            <Route path="/api/rankaccount" element={<RankAccountPage />} />
-            <Route path="/api/role" element={<RolePage />} />
-            {/* Partner */}
-            <Route path="/pt/game" element={<RolePage />} />
-            <Route path="/pt/account" element={<RolePage />} />
-          </Routes>
-        </main>
-        <Footer />
-
       </div>
     </BrowserRouter>
   );

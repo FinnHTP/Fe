@@ -1,4 +1,5 @@
 
+
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import { formatInTimeZone } from 'date-fns-tz';
@@ -8,7 +9,7 @@ export const getBlogsByGroup = async (groupId) => {
     console.log(response.data)
     return response.data;
   } catch (error) {
-    console.error('Error fetching blogs:', error);
+    console.error("Error fetching blogs:", error);
     throw error;
   }
 };
@@ -59,7 +60,7 @@ export const createComment = async (token, content, parentId, groupId) => {
     };
 
     const response = await axios.post(
-      `http://localhost:8080/api/commentblog/blog/${groupId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${groupId}`,
       comment,
       {
         headers: {
@@ -121,7 +122,7 @@ export const getCommentsByBlog = async (blogId) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/commentblog/blog/${blogId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${groupId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
