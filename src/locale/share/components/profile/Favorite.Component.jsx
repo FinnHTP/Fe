@@ -52,19 +52,19 @@ const FavoriteComponent = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentItems.map((favorite) => (
           <div key={favorite.id} className="bg-white shadow-lg rounded-lg p-4">
-            <h5 className="text-lg font-bold mb-2">{favorite.game.name}</h5>
+            <h5 className="text-lg font-bold mb-2">{favorite?.game.name}</h5>
             <img
               className="w-full h-40 object-cover mb-2"
-              src={`/img/recent-game/${favorite.game.image}`}
+              src={`/img/recent-game/${favorite?.game.image}`}
               alt={favorite.game.name}
             />
-            <p className="text-gray-500 mb-2">{favorite.game.description}</p>
+            <p className="text-gray-500 mb-2">{favorite?.game.description}</p>
             <p className="text-gray-500 mb-4">
-              <strong>Price:</strong> {favorite.game.priceGame}
+              <strong>Price:</strong> {favorite?.game.priceGame}
             </p>
             <button
               onClick={() => handleUnlike(favorite.id)}
-              className="bg-yellow-500 text-white px-4 py-2 rounded"
+              className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Unlike
             </button>
@@ -80,7 +80,7 @@ const FavoriteComponent = () => {
                   onClick={() => handlePageChange(number + 1)}
                   className={`px-4 py-2 border rounded ${
                     currentPage === number + 1
-                      ? "bg-yellow-500 text-white"
+                      ? "bg-blue-500 text-white"
                       : "text-gray-700"
                   }`}
                 >
