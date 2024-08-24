@@ -112,7 +112,7 @@ const TopNewReleases = () => {
             className="max-w-sm rounded overflow-hidden shadow-lg"
           >
             <img
-              className="w-full hover:opacity-80 cursor-pointer"
+              className="image-game w-full hover:opacity-80 cursor-pointer"
               src={`image/games/${game.image}`}
               alt={game.image}
               onClick={() => navGame(game.id)}
