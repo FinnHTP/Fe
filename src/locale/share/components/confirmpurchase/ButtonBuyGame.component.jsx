@@ -96,12 +96,12 @@ const ButtonBuyGame = () => {
   }, [id]);
   return (
     <div>
-      <div
+      <button
         className="buttonconfirm bg-customBgBrowse cursor-pointer text-white py-2 px-4 rounded hover:bg-gray-500 inline-block mt-5"
         onClick={buyGame}
       >
         Confirm
-      </div>
+      </button>
     </div>
   );
 };
