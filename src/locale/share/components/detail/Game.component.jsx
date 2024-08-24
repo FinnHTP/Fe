@@ -86,12 +86,6 @@ const Game = () => {
   }, [id]);
   return (
     <div className="mx-5">
-      <div className="flex flex-wrap gap-4">
-        <div className="text-white cursor-pointer border-b-4   border-customCouponBg">
-          Overview
-        </div>
-        <div className="text-white cursor-pointer">Rating</div>
-      </div>
       <h1 className="text-white text-4xl mt-3">{game.name || "Loading..."}</h1>{" "}
       <StarRating rating={rating} />
       <div className="grid grid-cols-2 gap-4 w-2/3">

@@ -7,18 +7,17 @@ const { Title, Paragraph } = Typography;
 
 function BackUpUI() {
   return (
-    <Layout className="min-h-screen bg-white font-serif">
-      <Content className="p-8 text-center">
-        <div className="bg-[url('https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif')] bg-center h-96 flex items-center justify-center">
-          <Title
-            level={1}
-            className="text-gray-800"
-            style={{ fontSize: "6rem" }}
-          >
-            404
-          </Title>
-        </div>
-        <div className="text-center mt-[50px]">
+    <Layout className="w-full min-h-screen bg-white font-serif">
+      <Content className="text-center">
+        <div className="bg-[url('https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif')] bg-center h-96 flex items-center justify-center"></div>
+        <Title
+          level={1}
+          className="text-gray-800 mb-16"
+          style={{ fontSize: "5rem" }}
+        >
+          404
+        </Title>
+        <div className="text-center">
           <Title level={3} className=" text-gray-800">
             Something wrong with the server!!!
           </Title>

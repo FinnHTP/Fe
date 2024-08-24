@@ -434,7 +434,7 @@ function ChatMessage({ text, username, createdAt, id, reaction }) {
             value > 0 && (
               <img
                 key={key}
-                src={`http://127.0.0.1:8000/images/${key}.png`}
+                src={`/image/reactions/${key}.png`}
                 alt={key}
                 style={{ margin: "5px", width: "20px", height: "20px" }}
               />

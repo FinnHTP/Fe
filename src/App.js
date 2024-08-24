@@ -22,16 +22,22 @@ import DetailPage from "./locale/share/detail/DetailPage.jsx";
 
 import GroupPageUser from "./locale/share/group/GroupPage.jsx";
 import Toast from "./locale/share/components/common/Toast.component.jsx";
+import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="bg-customBg font-mono">
-        <Header></Header>
-        <div className="App  mx-auto container">
+        {window.location.pathname !== "/404" ? <Header></Header> : ""}
+        <div
+          className={`App mx-auto ${
+            window.location.pathname === "/404" ? "" : "container"
+          }`}
+        >
           <div className="flex flex-col min-h-screen">
             <main className="flex-grow">
               <Routes>
+                <Route path="/404" element={<BackUpUI />} />
                 {/* Shared */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
@@ -48,6 +54,7 @@ function App() {
                   path="/confirm-purchase/:id"
                   element={<ConfirmPurchase />}
                 />
+
                 {/* Admin */}
                 <Route path="/api/game" element={<GamePage />} />
                 <Route path="/api/account" element={<AccountPage />} />
@@ -68,7 +75,7 @@ function App() {
           </div>
         </div>
         <Toast></Toast>
-        <Footer></Footer>
+        {window.location.pathname !== "/404" ? <Footer></Footer> : ""}
       </div>
     </BrowserRouter>
   );
