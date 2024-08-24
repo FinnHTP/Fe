@@ -78,10 +78,10 @@ function App() {
         {window.location.pathname !== "/404" && <Header />}
         <div
           className={`App mx-auto ${
-            window.location.pathname === "/404" ||
-            window.location.pathname === "/profile"
-              ? ""
-              : "container"
+            window.location.pathname !== "/404" &&
+            window.location.pathname !== "/profile"
+              ? "container"
+              : ""
           }`}
         >
           <div className="flex flex-col min-h-screen">
