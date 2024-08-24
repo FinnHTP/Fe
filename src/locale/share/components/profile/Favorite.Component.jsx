@@ -1,6 +1,9 @@
 // src/components/FavoriteComponent.js
-import React, { useEffect, useState } from 'react';
-import { getFavorites, unlikeFavorite } from '../../services/profile/Favorite.service'
+import React, { useEffect, useState } from "react";
+import {
+  getFavorites,
+  unlikeFavorite,
+} from "../../services/profile/Favorite.service";
 
 const FavoriteComponent = () => {
   const [favorites, setFavorites] = useState([]);
@@ -12,7 +15,7 @@ const FavoriteComponent = () => {
       const data = await getFavorites();
       setFavorites(data);
     } catch (error) {
-      console.error('Failed to fetch favorites:', error);
+      console.error("Failed to fetch favorites:", error);
     }
   };
 
@@ -23,10 +26,10 @@ const FavoriteComponent = () => {
   const handleUnlike = async (favoriteId) => {
     try {
       await unlikeFavorite(favoriteId);
-      setFavorites(favorites.filter(favorite => favorite.id !== favoriteId));
-      console.log('Removed from favorites successfully');
+      setFavorites(favorites.filter((favorite) => favorite.id !== favoriteId));
+      console.log("Removed from favorites successfully");
     } catch (error) {
-      console.error('Failed to remove from favorites:', error);
+      console.error("Failed to remove from favorites:", error);
     }
   };
 
@@ -40,9 +43,11 @@ const FavoriteComponent = () => {
   const totalPages = Math.ceil(favorites.length / itemsPerPage);
 
   return (
-    <div className="p-4">
-      <h6 className="text-xl font-semibold mb-2">My Favorites</h6>
-      <p className="text-gray-600 mb-4">Display information about the games you liked.</p>
+    <div className="p-4 bg-[#FFFFFF]">
+      <h6 className="text-2xl py-3 px-2">Favorite Games</h6>
+      <p className="text-gray-600 mb-4">
+        Display information about the games you liked.
+      </p>
       <hr className="my-4 border-gray-300" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentItems.map((favorite) => (
@@ -73,7 +78,11 @@ const FavoriteComponent = () => {
               <li key={number + 1}>
                 <button
                   onClick={() => handlePageChange(number + 1)}
-                  className={`px-4 py-2 border rounded ${currentPage === number + 1 ? 'bg-yellow-500 text-white' : 'text-gray-700'}`}
+                  className={`px-4 py-2 border rounded ${
+                    currentPage === number + 1
+                      ? "bg-yellow-500 text-white"
+                      : "text-gray-700"
+                  }`}
                 >
                   {number + 1}
                 </button>
