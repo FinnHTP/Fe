@@ -126,7 +126,7 @@ function App() {
           </div>
         </div>
         {/* <Toast /> */}
-        <Footer />
+        {window.location.pathname !== "/404" && <Footer />}
       </div>
     </BrowserRouter>
   );
