@@ -1,14 +1,16 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
   getAllGames,
   getGameById,
-  createGame,
+  createGameWithImage,
   updateGame,
   deleteGame,
   getGameTypes,
+  uploadGameImage,
+  getCoupons
 } from '../../service/Game.service';
 import NavbarAdminComponent from '../../component/NavbarAdmin.Component';
-
 const GameComponent = () => {
   const [games, setGames] = useState([]);
   const [game, setGame] = useState({
@@ -25,9 +27,12 @@ const GameComponent = () => {
   const [searchId, setSearchId] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [expandedGameIds, setExpandedGameIds] = useState([]); // State to track expanded descriptions
-
+  const [expandedGameIds, setExpandedGameIds] = useState([]);
+  const [newGameImage, setNewGameImage] = useState(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState(null);
   const token = localStorage.getItem('accesstoken');
+  const [coupons, setCoupons] = useState([]);
+  const [selectedCoupon, setSelectedCoupon] = useState('');
 
   const itemsPerPage = 7;
 
@@ -35,6 +40,18 @@ const GameComponent = () => {
     loadGames();
     loadGameTypes();
   }, []);
+
+  useEffect(() => {
+    if (game.id) {
+      const fetchGameData = async () => {
+        const gameData = await getGameById(game.id, token);
+        setGame(gameData);
+        setPreviewImageUrl(gameData.image ? `data:image/jpeg;base64,${gameData.image}` : null);
+      };
+      fetchGameData();
+    }
+  }, [game.id, token]);
+  
 
   const loadGames = async () => {
     try {
@@ -54,6 +71,8 @@ const GameComponent = () => {
     }
   };
 
+
+
   const searchGameById = async () => {
     try {
       const data = await getGameById(searchId, token);
@@ -63,21 +82,72 @@ const GameComponent = () => {
     }
   };
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
-      if (game.id) {
-        await updateGame(game.id, game, token);
+      let dataToSend;
+  
+      // Kiểm tra xem người dùng có tải lên ảnh mới không
+      if (newGameImage) {
+        // Sử dụng FormData để gửi ảnh mới cùng với các trường khác
+        dataToSend = new FormData();
+        dataToSend.append('name', game.name);
+        dataToSend.append('description', game.description);
+        dataToSend.append('priceGame', game.priceGame);
+        dataToSend.append('status', game.status);
+        dataToSend.append('releaseDate', game.releaseDate);
+        dataToSend.append('version', game.version);
+        dataToSend.append('gameType', game.gameType.id);
+        dataToSend.append('couponId', game.coupon.id); // Thêm Coupon ID
+        dataToSend.append('image', newGameImage); 
+  
       } else {
-        await createGame(game, token);
+        // Gửi dữ liệu dưới dạng JSON nếu không có ảnh mới
+        dataToSend = {
+          name: game.name,
+          description: game.description,
+          priceGame: game.priceGame,
+          status: game.status,
+          releaseDate: game.releaseDate,
+          version: game.version,
+          gameTypeId: game.gameType.id,
+          couponId: game.coupon.id, // Thêm Coupon ID
+        };
       }
-      loadGames();
-      handleResetForm();
-      setShowModal(false);
+  
+      if (game.id) {
+        // Nếu đang chỉnh sửa game hiện có, sử dụng PUT
+        await axios.put(`http://localhost:8080/api/games/${game.id}`, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            ...(newGameImage && { 'Content-Type': 'multipart/form-data' }),
+            ...(!newGameImage && { 'Content-Type': 'application/json' })
+          }
+        });
+      } else {
+        // Nếu là game mới, sử dụng POST
+        await axios.post('http://localhost:8080/api/games', dataToSend, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            ...(newGameImage && { 'Content-Type': 'multipart/form-data' }),
+            ...(!newGameImage && { 'Content-Type': 'application/json' })
+          }
+        });
+      }
+  
+      loadGames(); // Tải lại danh sách game
+      handleResetForm(); // Đặt lại form
+      setShowModal(false); // Đóng modal
     } catch (error) {
-      console.error(error);
+      console.error("Lỗi khi xử lý game:", error);
     }
   };
+
+  
 
   const handleDelete = async (id) => {
     try {
@@ -98,7 +168,10 @@ const GameComponent = () => {
       releaseDate: '',
       version: '',
       gameType: '',
+      coupon:'',
     });
+    setNewGameImage(null);
+    setPreviewImageUrl(null);
   };
 
   const toggleModal = () => {
@@ -127,9 +200,40 @@ const GameComponent = () => {
       releaseDate: game.releaseDate,
       version: game.version,
       gameType: game.gameType,
+      coupon: game.coupon,
     });
-    setShowModal(true);
+  
+   
+    if (game.image) {
+      setPreviewImageUrl(`/image/games/${game.image}`); 
+    } else {
+      setPreviewImageUrl(null);
+    }
+  
+    setNewGameImage(null); 
+    setShowModal(true); 
   };
+  
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setNewGameImage(file);
+  //     const imageUrl = URL.createObjectURL(file);
+  //     setPreviewImageUrl(imageUrl);
+  //   }
+  // };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewGameImage(file);
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewImageUrl(imageUrl);
+    }
+  };
+  
+  
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -161,6 +265,7 @@ const GameComponent = () => {
       pageNumbers.push(totalPages);
     }
 
+
     return pageNumbers.map((number, index) => (
       <button
         key={index}
@@ -180,7 +285,25 @@ const GameComponent = () => {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year} `;
-};
+  };
+
+
+
+  useEffect(() => {
+   
+
+    loadCoupons();
+  }, []);
+
+  const loadCoupons = async () => {
+    try {
+      const data = await getCoupons(token);
+      setCoupons(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div className="flex">
@@ -224,7 +347,7 @@ const GameComponent = () => {
               </span>
 
               <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="bg-gray-200 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                       <label className="block">Name:</label>
@@ -321,6 +444,37 @@ const GameComponent = () => {
                           </option>
                         ))}
                       </select>
+                    </div>
+
+                    <div className="mb-4">
+      <label className="block">Coupon:</label>
+      <select
+        className="border p-2 w-full rounded"
+        name="coupon"
+        value={selectedCoupon}
+        onChange={(e) =>
+          setSelectedCoupon(e.target.value)
+        }
+      >
+        <option value="">Select a coupon</option>
+        {coupons.map((coupon) => (
+          <option key={coupon.id} value={coupon.id}>
+            {coupon.name} - {coupon.value}%
+          </option>
+        ))}
+      </select>
+    </div>
+    
+                    <div className="mb-4">
+                      <label className="block">Game Image:</label>
+                      <input
+                        type="file"
+                        onChange={handleImageChange}
+                        className="border p-2 w-full rounded"
+                      />
+                      {previewImageUrl && (
+                        <img src={previewImageUrl} alt="Preview" className="mt-2 max-w-full h-auto" />
+                      )}
                     </div>
 
                     <div className="flex justify-end">

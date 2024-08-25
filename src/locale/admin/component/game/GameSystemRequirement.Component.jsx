@@ -21,9 +21,9 @@ const GameSystemRequirementComponent = () => {
     proccessor: '',
     storage: '',
   });
-  const [expandedRowId, setExpandedRowId] = useState(null); 
+  const [expandedRowId, setExpandedRowId] = useState(null); // Để quản lý dòng đang được mở rộng
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; 
+  const itemsPerPage = 3; // Mỗi trang hiển thị 3 dòng
 
   const token = localStorage.getItem('accesstoken');
 
@@ -102,9 +102,9 @@ const GameSystemRequirementComponent = () => {
 
   const handleExpandRow = (id) => {
     if (expandedRowId === id) {
-      setExpandedRowId(null); 
+      setExpandedRowId(null); // Đóng nếu đang mở
     } else {
-      setExpandedRowId(id); 
+      setExpandedRowId(id); // Mở dòng hiện tại
     }
   };
 
@@ -389,7 +389,7 @@ const GameSystemRequirementComponent = () => {
             </tbody>
           </table>
 
-       
+          {/* Pagination */}
           <div className="flex justify-center mt-4">
             {renderPageNumbers()}
           </div>

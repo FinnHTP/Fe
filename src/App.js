@@ -118,6 +118,8 @@ function App() {
                 <Route path="/api/rankaccount" element={<RankAccountPage />} />
                 <Route path="/api/role" element={<RolePage />} />
                 <Route path="/api/gametype" element={<GameTypePage />} />
+
+
                 {/* Partner */}
                 <Route path="/pt/game" element={<RolePage />} />
                 <Route path="/pt/account" element={<RolePage />} />
