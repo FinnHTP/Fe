@@ -22,6 +22,11 @@ module.exports = {
         customTextSales: "#ACACAD",
         customLoginBg:"rgb(24,27,32)",
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Merriweather', 'serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
       fontSize: {
         sxl: "1.2rem",
       },

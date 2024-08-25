@@ -1,6 +1,5 @@
-// src/components/FavoriteComponent.js
 import React, { useEffect, useState } from 'react';
-import { getFavorites, unlikeFavorite } from '../../services/profile/Favorite.service'
+import { getFavorites, unlikeFavorite } from '../../services/profile/Favorite.service';
 
 const FavoriteComponent = () => {
   const [favorites, setFavorites] = useState([]);
@@ -48,11 +47,13 @@ const FavoriteComponent = () => {
         {currentItems.map((favorite) => (
           <div key={favorite.id} className="bg-white shadow-lg rounded-lg p-4">
             <h5 className="text-lg font-bold mb-2">{favorite.game.name}</h5>
-            <img
-              className="w-full h-40 object-cover mb-2"
-              src={`/img/recent-game/${favorite.game.image}`}
-              alt={favorite.game.name}
-            />
+            {favorite.game.image && (
+              <img
+                className="w-full h-40 object-cover mb-2"
+                src={`/image/games/${favorite.game.image}`} // Sử dụng URL trực tiếp từ thư mục
+                alt={favorite.game.name}
+              />
+            )}
             <p className="text-gray-500 mb-2">{favorite.game.description}</p>
             <p className="text-gray-500 mb-4">
               <strong>Price:</strong> {favorite.game.priceGame}
