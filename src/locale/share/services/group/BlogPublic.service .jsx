@@ -14,7 +14,7 @@ import {jwtDecode} from 'jwt-decode';
 
 export const getBlogsByStatusGroup = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/api/blogs/public');
+    const response = await axios.get('https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/blogs/public');
     return response.data;
   } catch (error) {
     console.error('Error fetching blogs by status:', error);
@@ -39,7 +39,7 @@ export const createComment = async (token, content, parentId, groupId) => {
     };
 
     const response = await axios.post(
-      `http://localhost:8080/api/commentblog/blog/${groupId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${groupId}`,
       comment,
       {
         headers: {
@@ -58,7 +58,7 @@ export const createComment = async (token, content, parentId, groupId) => {
 
 export const getBlogById = async (blogId) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/blogs/${blogId}`);
+    const response = await axios.get(`https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/blogs/${blogId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching blog:', error);
@@ -77,7 +77,7 @@ export const getCommentsByBlog = async (blogId) => {
 
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/commentblog/blog/${blogId}`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${blogId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
