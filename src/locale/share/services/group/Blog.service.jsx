@@ -1,18 +1,18 @@
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { formatInTimeZone } from "date-fns-tz";
+
+import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
+import { formatInTimeZone } from 'date-fns-tz';
 export const getBlogsByGroup = async (groupId) => {
   try {
-    const response = await axios.get(
-      `http://localhost:8080/api/blogs/group/${groupId}`
-    );
-    console.log(response.data);
+    const response = await axios.get(`http://localhost:8080/api/blogs/group/${groupId}`);
+    console.log(response.data)
     return response.data;
   } catch (error) {
-    console.error("Error fetching blogs:", error);
+    console.error('Error fetching blogs:', error);
     throw error;
   }
 };
+
 
 export const getAvatar = async (accountId) => {
   try {
@@ -22,29 +22,28 @@ export const getAvatar = async (accountId) => {
         responseType: "arraybuffer",
       }
     );
-    const blob = new Blob([response.data], {
-      type: response.headers["content-type"],
-    });
+    const blob = new Blob([response.data], { type: response.headers["content-type"] });
     const url = URL.createObjectURL(blob);
     return url;
   } catch (error) {
-    console.error(
-      "Failed to get avatar:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to get avatar:", error.response ? error.response.data : error.message);
     return null;
   }
 };
 
+
 export const getBlogsByStatusGroup = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/blogs/public");
+    const response = await axios.get('http://localhost:8080/api/blogs/public');
     return response.data;
   } catch (error) {
-    console.error("Error fetching blogs by status:", error);
+    console.error('Error fetching blogs by status:', error);
     throw error;
   }
 };
+
+
+
 
 export const createComment = async (token, content, parentId, groupId) => {
   try {
@@ -60,7 +59,7 @@ export const createComment = async (token, content, parentId, groupId) => {
     };
 
     const response = await axios.post(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${groupId}`,
+      `http://localhost:8080/api/commentblog/blog/${groupId}`,
       comment,
       {
         headers: {
@@ -85,6 +84,7 @@ export const createComment = async (token, content, parentId, groupId) => {
 //     throw new Error("Token not found");
 //   }
 
+
 //   try {
 //     const response = await axios.get(
 //       `http://localhost:8080/api/commentblog/blog/${groupId}`,
@@ -103,12 +103,10 @@ export const createComment = async (token, content, parentId, groupId) => {
 
 export const getBlogById = async (blogId) => {
   try {
-    const response = await axios.get(
-      `http://localhost:8080/api/blogs/${blogId}`
-    );
+    const response = await axios.get(`http://localhost:8080/api/blogs/${blogId}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    console.error('Error fetching blog:', error);
     throw error;
   }
 };
@@ -123,7 +121,7 @@ export const getCommentsByBlog = async (blogId) => {
 
   try {
     const response = await axios.get(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/commentblog/blog/${blogId}`,
+      `http://localhost:8080/api/commentblog/blog/${blogId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -143,11 +141,14 @@ export const createBlog = async (token, content, groupId) => {
     const accountId = decodedToken.id;
     const accountEmail = decodedToken.email;
 
+  
     const now = new Date();
 
-    const vietnamOffset = 7 * 60 * 60 * 1000;
+
+    const vietnamOffset = 7 * 60 * 60 * 1000; 
     const vietnamTime = new Date(now.getTime() + vietnamOffset);
 
+   
     const createDate = vietnamTime.toISOString();
 
     const blog = {
@@ -174,3 +175,5 @@ export const createBlog = async (token, content, groupId) => {
     throw error;
   }
 };
+
+

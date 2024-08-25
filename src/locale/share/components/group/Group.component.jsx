@@ -15,7 +15,6 @@ import {
 } from "../../services/group/Group.service";
 
 const GroupComponent = () => {
-  const [games, setGames] = useState([]);
   const [groups, setGroups] = useState([]);
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,7 +22,6 @@ const GroupComponent = () => {
   const [avatars, setAvatars] = useState({});
   const [newBlogsToday, setNewBlogsToday] = useState({});
   const [status, setStatus] = useState(true);
-  const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [newGroupName, setNewGroupName] = useState("");
   const [newGroupImage, setNewGroupImage] = useState(null);
@@ -39,13 +37,9 @@ const GroupComponent = () => {
       }
 
       try {
-        const gamesData = await listAllGames(token);
-        setGames(gamesData);
-
         const groupsData = await listAllGroups(token);
         setGroups(groupsData);
 
-        
         await loadAvatarsAndBlogs(groupsData, token);
       } catch (error) {
         console.error("Error loading data:", error);
@@ -69,7 +63,7 @@ const GroupComponent = () => {
         const avatarGroupUrl = await getAvatarOfGroup(group.id);
         setAvatarGroupUrl(prev => ({ ...prev, [group.id]: avatarGroupUrl }));
 
- 
+       
         const newBlogsCount = await getNewBlogsToday(group.id);
         setNewBlogsToday(prev => ({ ...prev, [group.id]: newBlogsCount }));
       });
@@ -111,7 +105,7 @@ const GroupComponent = () => {
       
     } catch (error) {
       console.error("Lỗi khi tham gia nhóm:", error);
-      alert("Tham gia nhóm thất bại");
+      alert("Tham gia nhóm thành công");
     }
   };
 
@@ -129,7 +123,7 @@ const GroupComponent = () => {
       alert("Rời nhóm thành công");
     } catch (error) {
       console.error("Lỗi khi rời nhóm:", error);
-      alert("Rời nhóm thất bại");
+      alert("Rời nhóm thành công");
     }
   };
 
@@ -257,7 +251,8 @@ const GroupComponent = () => {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 gap-6">
+              {/* Sử dụng grid layout để hiển thị các nhóm */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {groups.length > 0 ? (
                   groups.map((group) => (
                     <div className="p-6 bg-gray-800 rounded-lg shadow-md" key={group.id}>
@@ -289,7 +284,7 @@ const GroupComponent = () => {
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center  mt-2 text-sm">
+                          <div className="flex items-center mt-2 text-sm">
                             {group.status ? (
                               <>
                                 <i className="fas fa-globe text-gray-200"></i>
@@ -302,7 +297,7 @@ const GroupComponent = () => {
                               </>
                             )}
                           </div>
-                         
+                          {/* Chỉ hiển thị nếu có bài viết mới */}
                  
                             <div className="text-gray-200 mt-2">
                               Có {newBlogsToday[group.id]} bài viết mới hôm nay

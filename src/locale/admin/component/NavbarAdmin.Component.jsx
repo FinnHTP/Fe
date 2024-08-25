@@ -25,7 +25,7 @@ const NavbarAdminComponent = () => {
           className="flex items-center p-2 hover:bg-gray-800 rounded transition-all duration-200"
         >
           <FontAwesomeIcon icon={faTachometer} className="text-primary mr-3" />
-          <span>Dashboard</span>
+          <span>Account</span>
         </Link>
         <div className="relative group">
           <button className="flex items-center p-2 w-full hover:bg-gray-800 rounded transition-all duration-200 focus:outline-none">

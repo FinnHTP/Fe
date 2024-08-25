@@ -89,19 +89,19 @@ const GametypeComponent = () => {
     setCurrentPage(page);
   };
 
-
+  // Tính toán các dòng để hiển thị dựa trên trang hiện tại
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = gameTypes.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(gameTypes.length / itemsPerPage);
 
-  // "1 2 3 ... 10"
+  // Logic phân trang kiểu "1 2 3 ... 10"
   const renderPageNumbers = () => {
     const pageNumbers = [];
-    const maxPagesToShow = 3; 
+    const maxPagesToShow = 3; // Số lượng trang hiển thị trước và sau trang hiện tại
 
-    
+    // Thêm trang đầu tiên và các trang tiếp theo (nếu có)
     if (currentPage > maxPagesToShow + 1) {
       pageNumbers.push(1);
       pageNumbers.push('...');
@@ -111,10 +111,10 @@ const GametypeComponent = () => {
       }
     }
 
-    
+    // Thêm trang hiện tại
     pageNumbers.push(currentPage);
 
-    
+    // Thêm các trang tiếp theo và trang cuối cùng (nếu có)
     for (let i = currentPage + 1; i <= Math.min(currentPage + maxPagesToShow, totalPages); i++) {
       pageNumbers.push(i);
     }
@@ -140,12 +140,12 @@ const GametypeComponent = () => {
 
   return (
     <div className="flex">
-    
+      {/* Sidebar */}
       <div className="w-1/4 bg-gray-900 min-h-screen">
         <NavbarAdminComponent />
       </div>
 
-    
+      {/* Main Content */}
       <div className="w-3/4 p-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl text-gray-200">Game Types</h2>
@@ -167,7 +167,7 @@ const GametypeComponent = () => {
                   name="name"
                   value={gameType.name}
                   onChange={onInputChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded bg-customBgFreeGames text-white"
                 />
               </div>
               <div className="flex justify-end">
@@ -223,7 +223,7 @@ const GametypeComponent = () => {
           </tbody>
         </table>
 
-     
+        {/* Pagination */}
         <div className="flex justify-center mt-4">
           {renderPageNumbers()}
         </div>
