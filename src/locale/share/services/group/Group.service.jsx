@@ -60,7 +60,7 @@ export const getAvatar = async (accountId) => {
 export const getAvatarOfGroup = async (groupId) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/group/${groupId}/image`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
       {
         responseType: "arraybuffer",
       }
@@ -80,7 +80,7 @@ export const uploadAvatarGroup = async (groupId, file, token) => {
 
   try {
     const response = await axios.post(
-      `http://localhost:8080/api/group/${groupId}/image`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
       formData,
       {
         headers: {
@@ -99,7 +99,7 @@ export const uploadAvatarGroup = async (groupId, file, token) => {
 
 export const searchGroups = async (searchTerm) => {
   try {
-    const response = await axios.get("http://localhost:8080/api/group/search", {
+    const response = await axios.get("https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/search", {
       params: { name: searchTerm },
     });
     return response.data;
@@ -115,7 +115,7 @@ export const checkJoinedGroups = async (groups, token) => {
 
   try {
     const joinedGroupsPromises = groups.map(async (group) => {
-      const response = await axios.get(`http://localhost:8080/api/group/${group.id}/isUserJoined`, {
+      const response = await axios.get(`https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${group.id}/isUserJoined`, {
         params: { accountId },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +138,7 @@ export const joinGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `http://localhost:8080/api/group/joinGroup`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/joinGroup`,
       { accountId, groupId },
       {
         headers: {
@@ -159,7 +159,7 @@ export const leaveGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `http://localhost:8080/api/group/leaveGroup`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/leaveGroup`,
       { accountId, groupId },
       {
         headers: {
@@ -187,7 +187,7 @@ export const createGroup = async (newGroupName, newGroupImage, status, token) =>
 
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/group",
+      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group",
       formData,
       {
         headers: {
@@ -210,7 +210,7 @@ export const fetchJoinedGroups = async (groups, token) => {
 
 export const getNewBlogsToday = async (groupId, token) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/group/${groupId}/blogday`, {
+    const response = await axios.get(`https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/blogday`, {
     
     });
     return response.data;
