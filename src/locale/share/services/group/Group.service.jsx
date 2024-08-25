@@ -4,7 +4,7 @@ import {jwtDecode} from 'jwt-decode';
 
 export const listAllGames = async (token) => {
   try {
-    const response = await axios.get("http://localhost:8080/api/games", {
+    const response = await axios.get("https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/games", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,7 +18,7 @@ export const listAllGames = async (token) => {
 
 export const listAllGroups = async (token) => {
   try {
-    const response = await axios.get("http://localhost:8080/api/group", {
+    const response = await axios.get("https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -32,7 +32,7 @@ export const listAllGroups = async (token) => {
 
 export const getGroupAvatars = async (groupId) => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/group/member/${groupId}`);
+    const response = await axios.get(`https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/member/${groupId}`);
     return response.data;
   } catch (error) {
     console.error("Failed to get group avatars:", error.response ? error.response.data : error.message);
@@ -43,7 +43,7 @@ export const getGroupAvatars = async (groupId) => {
 export const getAvatar = async (accountId) => {
   try {
     const response = await axios.get(
-      `http://localhost:8080/api/user/${accountId}/avatar`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/user/${accountId}/avatar`,
       {
         responseType: "arraybuffer",
       }
