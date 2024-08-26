@@ -31,10 +31,10 @@ import UnauthorizedPage from "./locale/auth/services/decentralized/UnauthorizedP
 import NotFoundPage from "./locale/auth/decentralized/Page404.Component";
 import GameTypePage from "./locale/admin/gametype/GameTypePage";
 
-import Chart from "./locale/admin/component/stat/Chart.Component";
-import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
-import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
-import Toast from "./locale/share/components/common/Toast.component.jsx";
+// import Chart from "./locale/admin/component/stat/Chart.Component";
+// import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
+// import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
+// import Toast from "./locale/share/components/common/Toast.component.jsx";
 import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
 import SuccessPayment from "./locale/share/components/common/SuccessPayment.jsx";
 import FailurePayment from "./locale/share/components/common/FailurePayment.jsx";
