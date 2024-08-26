@@ -19,7 +19,7 @@ import Footer from "./locale/share/components/common/Footer.component.jsx";
 import LoginPage from "./locale/auth/login/LoginPage.jsx";
 import RegisterPage from "./locale/auth/register/RegisterPage.jsx";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
-import GroupPage from "./locale/share/group/GroupPage.jsx";
+import GroupPageUser from "./locale/share/group/GroupPage.jsx";
 import { jwtDecode } from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
