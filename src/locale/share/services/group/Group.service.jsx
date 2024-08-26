@@ -1,16 +1,14 @@
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+
+import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
 export const listAllGames = async (token) => {
   try {
-    const response = await axios.get(
-      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/games",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get("http://localhost:8080/api/games", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Lỗi khi gửi yêu cầu:", error);
@@ -20,14 +18,11 @@ export const listAllGames = async (token) => {
 
 export const listAllGroups = async (token) => {
   try {
-    const response = await axios.get(
-      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get("http://localhost:8080/api/group", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Lỗi khi gửi yêu cầu:", error);
@@ -37,15 +32,10 @@ export const listAllGroups = async (token) => {
 
 export const getGroupAvatars = async (groupId) => {
   try {
-    const response = await axios.get(
-      `http://localhost:8080/api/group/member/${groupId}`
-    );
+    const response = await axios.get(`http://localhost:8080/api/group/member/${groupId}`);
     return response.data;
   } catch (error) {
-    console.error(
-      "Failed to get group avatars:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to get group avatars:", error.response ? error.response.data : error.message);
     throw error;
   }
 };
@@ -58,16 +48,11 @@ export const getAvatar = async (accountId) => {
         responseType: "arraybuffer",
       }
     );
-    const blob = new Blob([response.data], {
-      type: response.headers["content-type"],
-    });
+    const blob = new Blob([response.data], { type: response.headers["content-type"] });
     const url = URL.createObjectURL(blob);
     return url;
   } catch (error) {
-    console.error(
-      "Failed to get avatar:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to get avatar:", error.response ? error.response.data : error.message);
     return null;
   }
 };
@@ -75,21 +60,16 @@ export const getAvatar = async (accountId) => {
 export const getAvatarOfGroup = async (groupId) => {
   try {
     const response = await axios.get(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
+      `http://localhost:8080/api/group/${groupId}/image`,
       {
         responseType: "arraybuffer",
       }
     );
-    const blob = new Blob([response.data], {
-      type: response.headers["content-type"],
-    });
+    const blob = new Blob([response.data], { type: response.headers["content-type"] });
     const urlGroup = URL.createObjectURL(blob);
     return urlGroup;
   } catch (error) {
-    console.error(
-      "Failed to get avatar:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to get avatar:", error.response ? error.response.data : error.message);
     return null;
   }
 };
@@ -100,7 +80,7 @@ export const uploadAvatarGroup = async (groupId, file, token) => {
 
   try {
     const response = await axios.post(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/image`,
+      `http://localhost:8080/api/group/${groupId}/image`,
       formData,
       {
         headers: {
@@ -112,10 +92,7 @@ export const uploadAvatarGroup = async (groupId, file, token) => {
     console.log("Avatar uploaded successfully:", response.data);
     return response.data;
   } catch (error) {
-    console.error(
-      "Failed to upload avatar:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to upload avatar:", error.response ? error.response.data : error.message);
     throw error;
   }
 };
@@ -138,15 +115,12 @@ export const checkJoinedGroups = async (groups, token) => {
 
   try {
     const joinedGroupsPromises = groups.map(async (group) => {
-      const response = await axios.get(
-        `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${group.id}/isUserJoined`,
-        {
-          params: { accountId },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`http://localhost:8080/api/group/${group.id}/isUserJoined`, {
+        params: { accountId },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data ? group.id : null;
     });
 
@@ -164,13 +138,13 @@ export const joinGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/joinGroup`,
+      `http://localhost:8080/api/group/joinGroup`,
       { accountId, groupId },
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
   } catch (error) {
@@ -185,13 +159,13 @@ export const leaveGroup = async (groupId, token) => {
 
   try {
     await axios.post(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/leaveGroup`,
+      `http://localhost:8080/api/group/leaveGroup`,
       { accountId, groupId },
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
   } catch (error) {
@@ -200,12 +174,7 @@ export const leaveGroup = async (groupId, token) => {
   }
 };
 
-export const createGroup = async (
-  newGroupName,
-  newGroupImage,
-  status,
-  token
-) => {
+export const createGroup = async (newGroupName, newGroupImage, status, token) => {
   if (!newGroupName || !newGroupImage) {
     throw new Error("Vui lòng nhập tên nhóm và chọn ảnh đại diện.");
   }
@@ -218,7 +187,7 @@ export const createGroup = async (
 
   try {
     const response = await axios.post(
-      "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group",
+      "http://localhost:8080/api/group",
       formData,
       {
         headers: {
@@ -233,6 +202,7 @@ export const createGroup = async (
   }
 };
 
+
 export const fetchJoinedGroups = async (groups, token) => {
   const joinedGroupIds = await checkJoinedGroups(groups, token);
   return joinedGroupIds;
@@ -240,16 +210,12 @@ export const fetchJoinedGroups = async (groups, token) => {
 
 export const getNewBlogsToday = async (groupId, token) => {
   try {
-    const response = await axios.get(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/group/${groupId}/blogday`,
-      {}
-    );
+    const response = await axios.get(`http://localhost:8080/api/group/${groupId}/blogday`, {
+    
+    });
     return response.data;
   } catch (error) {
-    console.error(
-      "Failed to fetch new blogs count:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Failed to fetch new blogs count:", error.response ? error.response.data : error.message);
     throw error;
   }
 };

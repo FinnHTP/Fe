@@ -99,10 +99,13 @@ function App() {
                 <Route path="/store" element={<StorePage />} />
                 <Route path="/profile/*" element={<ProfilePage />} />
                 <Route path="/forum" element={<ForumPage />} />
+                <Route path="/blogs/public" element={<BlogPublicComponent/>} />
                 <Route path="/group" element={<GroupPageUser />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<DetailPage />} />
+                <Route path="/blogs/group/:groupId" element={<BlogComponent />} />
+            <Route path="/commentblog/blog/:id" element={<BlogComponent />} />
                 <Route path="/confirm-purchase" element={<ConfirmPurchase />} />
                 <Route
                   path="/confirm-purchase/:id"
@@ -122,6 +125,8 @@ function App() {
                 <Route path="/api/rankaccount" element={<RankAccountPage />} />
                 <Route path="/api/role" element={<RolePage />} />
                 <Route path="/api/gametype" element={<GameTypePage />} />
+
+
                 {/* Partner */}
                 <Route path="/pt/game" element={<RolePage />} />
                 <Route path="/pt/account" element={<RolePage />} />

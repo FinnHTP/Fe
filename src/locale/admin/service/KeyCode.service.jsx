@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/keycode";
+const API_URL = "https://websitegamemanagement.vercel.app/api/keycode";
 
 export const searchKeycodeById = async (searchId, token) => {
     if (!token) {

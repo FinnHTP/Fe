@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  useAccount,
-  getAvatar,
-  uploadAvatar,
-  recharge,
-  updateAccount,
   findAccountById,
   findUserById,
-  handleGetAvatar,
+  getAvatar,
+  recharge,
+  updateAccount,
+  uploadAvatar,
 } from "../../services/profile/AccountSetting.service";
-import { getAccountbyUsername } from "../../services/profile/AccountSetting.service";
 
 const AccountSetting = () => {
   const [user, setUser] = useState({});
@@ -22,6 +19,8 @@ const AccountSetting = () => {
   const [showModal, setShowModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [deposit, setDeposit] = useState("");
+  const [message, setMessage] = useState("");
 
   const token = localStorage.getItem("accesstoken");
   useEffect(() => {
@@ -96,6 +95,20 @@ const AccountSetting = () => {
     setShowModal(true);
   };
 
+  const handleInputChange = (e) => {
+    setDeposit(e.target.value);
+  };
+
+  const handleClick = () => {
+    const amountNum = parseFloat(deposit);
+    if (amountNum > 0) {
+      const formattedAmount = new Intl.NumberFormat("vi-VN").format(amountNum);
+      setMessage(`You charge ${formattedAmount} VND`);
+    } else {
+      setMessage("Please enter an amount greater than 0 VND");
+    }
+  };
+
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
   const handleSdt = (e) => setSdt(e.target.value);
@@ -131,58 +144,89 @@ const AccountSetting = () => {
                   showModal ? "block" : "hidden"
                 }`}
               >
-                <div className="flex items-center justify-center min-h-screen">
-                  <div className="bg-white rounded-lg shadow-lg max-w-lg w-full">
-                    <div className="flex justify-between items-center p-4 border-b">
-                      <h5 className="text-lg font-medium">Recharge</h5>
+                <div className="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-50">
+                  <div className="bg-white rounded-lg shadow-lg max-w-md w-full">
+                    {/* Header */}
+                    <div className="flex justify-between items-center p-4 border-b bg-gray-100">
+                      <h5 className="text-lg font-semibold text-gray-700">
+                        Recharge
+                      </h5>
                       <button
                         type="button"
                         aria-label="Close"
                         onClick={handleCloseModal}
-                        className="text-gray-500"
+                        className="text-gray-500 hover:text-gray-700 focus:outline-none"
                       >
                         &times;
                       </button>
                     </div>
-                    <div className="p-4">
+
+                    {/* Body */}
+                    <div className="p-6">
                       <div>
-                        <h6 className="font-semibold">Credit Boosters</h6>
+                        <h6 className="font-semibold text-gray-600">
+                          Credit Boosters
+                        </h6>
                       </div>
-                      <div className="mt-3">
+                      <div className="mt-4 grid grid-cols-2 gap-4">
                         <button
-                          className="bg-yellow-500 hover:bg-yellow-800 text-white text-lg font-bold py-2 px-4 rounded w-32 mr-4 mb-4"
+                          className="bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded hover:scale-105"
                           onClick={() => handleRecharge(75000)}
                         >
-                          75.000 đ
+                          75.000 VND
                         </button>
                         <button
-                          className="bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-bold py-2 px-4 rounded w-32 mr-4 mb-4"
+                          className="bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded hover:scale-105"
                           onClick={() => handleRecharge(150000)}
                         >
-                          150.000 đ
+                          150.000 VND
                         </button>
                         <button
-                          className="bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-bold py-2 px-4 rounded w-32 mr-4 mb-4"
-                          onClick={() => handleRecharge(225000)}
-                        >
-                          225.000 đ
-                        </button>
-                        <button
-                          className="bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-bold py-2 px-4 rounded w-32 mr-4 mb-4"
+                          className="bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded hover:scale-105"
                           onClick={() => handleRecharge(300000)}
                         >
-                          300.000 đ
+                          300.000 VND
+                        </button>
+                        <button
+                          className="bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded hover:scale-105"
+                          onClick={() => handleRecharge(500000)}
+                        >
+                          500.000 VND
                         </button>
                       </div>
-                      <p className="text-sm text-red-500 mt-2">
-                        <strong>Notes:</strong> Very understanding because you
-                        can only top up in packages with a fixed price. Sorry
-                        for the inconvenience
+
+                      <div className="mt-6">
+                        <label className="block text-gray-700 font-semibold mb-2">
+                          Or Enter a Custom Amount
+                        </label>
+                        <input
+                          type="number"
+                          placeholder="Enter amount"
+                          value={deposit}
+                          onChange={handleInputChange}
+                          className="border rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:border-[#06193C] focus:text-[#06193C]"
+                        />
+                        <button
+                          className="mt-4 bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded w-full"
+                          onClick={handleClick}
+                        >
+                          Payment
+                        </button>
+                        <p className="mt-2 text-center text-gray-700">
+                          {message}
+                        </p>
+                      </div>
+
+                      <p className="text-sm text-gray-600 mt-4">
+                        <strong>Notes:</strong> You can only top up in packages
+                        with a fixed price. Sorry for the inconvenience.
                       </p>
                     </div>
-                    <div className="flex justify-end p-4 border-t">
+
+                    {/* Footer */}
+                    <div className="flex justify-end p-4 border-t bg-gray-100">
                       <button
-                        className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded"
+                        className="bg-[#06193C] hover:bg-[#06193C] text-white py-2 px-4 rounded"
                         onClick={handleCloseModal}
                       >
                         Close
