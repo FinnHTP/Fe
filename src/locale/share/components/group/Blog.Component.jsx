@@ -171,7 +171,7 @@ const BlogComponent = () => {
   };
 
   const handleBackClick = () => {
-    window.location.href = 'http://localhost:3000/group';
+    window.location.href = 'https://websitegamemanagement.vercel.app/group';
   };
 
   const handleCreateBlog = async () => {

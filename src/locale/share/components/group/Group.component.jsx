@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  listAllGames,
   listAllGroups,
-  getGroupAvatars,
-  getAvatar,
-  getAvatarOfGroup,
   searchGroups,
   joinGroup,
   leaveGroup,
@@ -18,8 +14,6 @@ const GroupComponent = () => {
   const [groups, setGroups] = useState([]);
   const [joinedGroups, setJoinedGroups] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [avatarGroupUrl, setAvatarGroupUrl] = useState({});
-  const [avatars, setAvatars] = useState({});
   const [newBlogsToday, setNewBlogsToday] = useState({});
   const [status, setStatus] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -40,7 +34,7 @@ const GroupComponent = () => {
         const groupsData = await listAllGroups(token);
         setGroups(groupsData);
 
-        await loadAvatarsAndBlogs(groupsData, token);
+        await loadBlogs(groupsData, token);
       } catch (error) {
         console.error("Error loading data:", error);
       }
@@ -49,26 +43,14 @@ const GroupComponent = () => {
     fetchData();
   }, []);
 
-  const loadAvatarsAndBlogs = async (groupsData, token) => {
+  const loadBlogs = async (groupsData, token) => {
     if (groupsData.length > 0) {
-      const avatarPromises = groupsData.map(async (group) => {
-        const groupAvatars = await getGroupAvatars(group.id);
-        const avatarUrls = await Promise.all(groupAvatars.map(member => getAvatar(member.id)));
-
-        setAvatars(prevAvatars => ({
-          ...prevAvatars,
-          [group.id]: avatarUrls,
-        }));
-
-        const avatarGroupUrl = await getAvatarOfGroup(group.id);
-        setAvatarGroupUrl(prev => ({ ...prev, [group.id]: avatarGroupUrl }));
-
-       
+      const blogPromises = groupsData.map(async (group) => {
         const newBlogsCount = await getNewBlogsToday(group.id);
-        setNewBlogsToday(prev => ({ ...prev, [group.id]: newBlogsCount }));
+        setNewBlogsToday((prev) => ({ ...prev, [group.id]: newBlogsCount }));
       });
 
-      await Promise.all(avatarPromises);
+      await Promise.all(blogPromises);
 
       const joinedGroupIds = await fetchJoinedGroups(groupsData, token);
       setJoinedGroups(joinedGroupIds);
@@ -102,10 +84,10 @@ const GroupComponent = () => {
     try {
       await joinGroup(groupId, token);
       await fetchJoinedGroups();
-      
+      alert("Tham gia nhóm thành công");
     } catch (error) {
       console.error("Lỗi khi tham gia nhóm:", error);
-      alert("Tham gia nhóm thành công");
+      
     }
   };
 
@@ -170,21 +152,21 @@ const GroupComponent = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="mb-6 text-center">
-                <input
-                  type="text"
-                  placeholder="Nhập tên nhóm..."
-                  className="px-4 py-2 border border-gray-300 rounded-md text-sm"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button
-                  onClick={handleSearch}
-                  className="ml-2 px-4 py-2 bg-yellow-500 text-white rounded-md"
-                >
-                  Tìm kiếm
-                </button>
-              </div>
+            <div className="flex ml-[40%] ">
+            <input
+              className="rounded-tl-2xl rounded-bl-2xl p-2 bg-customBgFreeGames text-white"
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Enter Group Name"
+            />
+            <span
+              className="text-white px-2 py-3 rounded-tr-2xl rounded-br-2xl bg-customBgBrowse  cursor-pointer"
+              onClick={handleSearch}
+            >
+              Search
+            </span>
+          </div>
 
               <button
                 onClick={handleShowModal}
@@ -258,7 +240,7 @@ const GroupComponent = () => {
                     <div className="p-6 bg-gray-800 rounded-lg shadow-md" key={group.id}>
                       <div className="flex items-center">
                         <img
-                          src={avatarGroupUrl[group.id]}
+                          src={`/image/games/${group.image}`} 
                           alt="Group Avatar"
                           className="w-24 h-24 rounded-lg"
                         />
@@ -270,19 +252,9 @@ const GroupComponent = () => {
                             Ngày tạo: {group.createDate}
                           </p>
                           <div className="flex items-center mt-2">
-                            {(avatars[group.id] || []).slice(0, 3).map((url, index) => (
-                              <img
-                                key={index}
-                                src={url}
-                                alt={`Avatar ${index + 1}`}
-                                className="w-8 h-8 rounded-full mr-2"
-                              />
-                            ))}
-                            {(avatars[group.id] || []).length > 3 && (
-                              <span className="text-gray-400 text-sm">
-                                Và {avatars[group.id].length - 3} người khác
-                              </span>
-                            )}
+                            <div className="text-gray-200 mt-2">
+                              Có {newBlogsToday[group.id]} bài viết mới hôm nay
+                            </div>
                           </div>
                           <div className="flex items-center mt-2 text-sm">
                             {group.status ? (
@@ -297,12 +269,6 @@ const GroupComponent = () => {
                               </>
                             )}
                           </div>
-                          {/* Chỉ hiển thị nếu có bài viết mới */}
-                 
-                            <div className="text-gray-200 mt-2">
-                              Có {newBlogsToday[group.id]} bài viết mới hôm nay
-                            </div>
-                        
                         </div>
                       </div>
 
