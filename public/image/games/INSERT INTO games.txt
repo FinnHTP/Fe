@@ -1,0 +1,274 @@
+INSERT INTO games (description_game, image, name, price, release_date, status, version, game_type)
+VALUES
+    ('Embark on a thrilling space journey with strategic battles and exploration in this captivating MMORPG experience.',
+     'StarRail.jpeg',
+     'Star Rail',
+     0,  -- Free
+     '2024-09-15',
+     1,  -- Available
+     '1.0',
+     13),
+
+    ('Explore a vast open world with action combat mechanics and a rich character system in this engaging RPG.',
+     'GenshinImpact.jpeg',
+     'Genshin Impact',
+     0,  -- Free
+     '2024-09-28',
+     1,  -- Available
+     '1.0',
+     14),
+
+    ('Discover a mysterious world with innovative combat systems and a rich action gameplay experience in this thrilling RPG.',
+     'wutheringwaves.jpeg',
+     'Wuthering Waves',
+     0,  -- Free
+     '2024-10-01',
+     1,  -- Available
+     '1.0',
+     14),
+
+    ('Explore a new adventure world with challenging quests and an engaging storyline in this game.',
+     'Fallyuy.webp',
+     'Fallyuy',
+     0,  -- Free
+     '2024-11-01',
+     1,  -- Available
+     '1.0',
+     2),
+    ('Join the battle in a visually stunning sci-fi universe with fast-paced action and cooperative gameplay in this free-to-play shooter.',
+     'warframe.jpeg',
+     'Warframe',
+     0,  -- Free
+     '2024-12-01',  -- Release date (or a different date if needed)
+     1,  -- Status (1 for available)
+     '1.0',
+     1),  -- Game type ID (assuming 1 for Action Game)
+-- Add Firestone
+    ('Embark on an epic journey with intense action and strategic combat in this thrilling adventure game.',
+     'Firestone.jpeg',
+     'Firestone',
+     0,  -- Free
+     '2024-11-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     3), -- Game type ID (assuming 3 for Action Game)
+-- Add PUBG
+    ('Engage in high-stakes battle royale action with intense combat and survival elements in this popular multiplayer game.',
+     'pubg.jpeg',
+     'PUBG',
+     0,  -- Free
+     '2024-12-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     7),  -- Game type ID (assuming 7 for Survival Shooter Game
+-- Add Destiny 2
+    ('Experience an expansive universe with cooperative and competitive multiplayer modes in this action-packed FPS game.',
+     'Destiny2.jpeg',
+     'Destiny 2',
+     0,  -- Free
+     '2024-10-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),
+    ('Join the fight against massive Behemoths in this cooperative action RPG set in a vibrant, fantasy world.',
+     'Dauntless.jpeg',
+     'Dauntless',
+     0,  -- Free
+     '2024-11-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     1),
+    ('Build and manage your own shop, craft items, and embark on adventures in this engaging simulation game.',
+     'shoptitans.jpeg',
+     'Shop Titans',
+     0,  -- Free
+     '2024-12-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     14),
+    ('Dive into a dark fantasy world with complex skill trees and deep character customization in this free-to-play action RPG.',
+     'EGS_PathofExile.jpeg',
+     'Path of Exile',
+     0,  -- Free
+     '2024-10-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),
+    ('Explore dark dungeons and face terrifying enemies in this intense cooperative dungeon crawler.',
+     'dark-and-darker.jpeg',
+     'Dark and Darker',
+     0,  -- Free
+     '2024-10-10',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     1),  -- Game type ID (assuming 1 for Action Game)
+
+    ('Race through Disney-themed tracks in this fast-paced and fun racing game featuring popular Disney characters.',
+     'DisneySpeedstorm.jpeg',
+     'Disney Speedstorm',
+     0,  -- Free
+     '2024-11-05',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     2),  -- Game type ID (assuming 2 for Racing Game)
+
+    ('Embark on epic adventures in a high-fantasy world with rich role-playing elements in this classic RPG.',
+     'Dungeons&Dragons.jpeg',
+     'Dungeons & Dragons',
+     0,  -- Free
+     '2024-12-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),  -- Game type ID (assuming 13 for RPG)
+
+    ('Experience fast-paced action and a deep storyline in this popular mobile action RPG from EGS.',
+     'EGS_HonkaiImpact3rd.jpeg',
+     'Honkai Impact 3rd',
+     0,  -- Free
+     '2024-09-20',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),  -- Game type ID (assuming 13 for Action RPG)
+
+    ('Enjoy a relaxing experience with various fishing adventures in this immersive simulation game.',
+     'fishing.jpeg',
+     'Fishing',
+     0,  -- Free
+     '2024-10-25',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     14),  -- Game type ID (assuming 14 for Simulation Game)
+
+    ('Fight in an epic battle with advanced weaponry in this action-packed shooter game.',
+     'Metalstorm.jpeg',
+     'Metalstorm',
+     0,  -- Free
+     '2024-11-20',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     1),  -- Game type ID (assuming 1 for Action Game)
+
+    ('Battle against other players in this vibrant and chaotic multiplayer brawler.',
+     'Multiversus.jpeg',
+     'Multiversus',
+     0,  -- Free
+     '2024-12-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     2),  -- Game type ID (assuming 2 for Fighting Game)
+
+    ('Join special operations missions in this tactical shooter game with realistic combat mechanics.',
+     'operation.jpeg',
+     'Operation',
+     0,  -- Free
+     '2024-10-30',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     1),  -- Game type ID (assuming 1 for Action Game)
+
+    ('Fight to survive in this strategic shooter game with intense battles and tactical gameplay.',
+     'predecessor.jpeg',
+     'Predecessor',
+     0,  -- Free
+     '2024-11-10',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     7),  -- Game type ID (assuming 7 for Survival Shooter Game)
+
+    ('Engage in mythological battles with gods and mythical creatures in this action-packed MOBA.',
+     'SMITE.jpeg',
+     'SMITE',
+     0,  -- Free
+     '2024-12-05',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     16),  -- Game type ID (assuming 16 for MOBA)
+
+    ('Explore new worlds and engage in strategic space battles in this sci-fi MMO.',
+     'StarTrekOnline.jpeg',
+     'Star Trek Online',
+     0,  -- Free
+     '2024-09-30',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),  -- Game type ID (assuming 13 for RPG)
+
+    ('Experience life simulation with detailed character customization and interactive environments.',
+     'TheSims4.jpeg',
+     'The Sims 4',
+     0,  -- Free
+     '2024-10-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     14),  -- Game type ID (assuming 14 for Simulation Game)
+
+    ('Engage in naval battles with advanced ships and tactics in this exciting naval warfare game.',
+     'warships.jpeg',
+     'Warships',
+     0,  -- Free
+     '2024-11-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     1),
+    ('Embark on a mystical journey in a visually stunning world with intricate gameplay and deep storylines in this adventure game.',
+     'Shangri-la.jpeg',
+     'Shangri-La',
+     0,  -- Free
+     '2024-11-20',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     2),  -- Game type ID (assuming 2 for Adventure Game)
+
+    ('Enjoy an exciting and unique experience with this engaging multiplayer game from EGS.',
+     'RoCo_EGS.jpeg',
+     'RoCo EGS',
+     0,  -- Free
+     '2024-12-01',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     16),  -- Game type ID (assuming 16 for MOBA or similar genre)
+
+    ('Race through detailed tracks and customize your car in this high-octane racing simulator.',
+     'rennsport.jpeg',
+     'Rennsport',
+     0,  -- Free
+     '2024-10-15',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     2),  -- Game type ID (assuming 2 for Racing Game)
+
+    ('Join epic battles and team-based gameplay in this popular game from EGS with a variety of heroes and maps.',
+     'Paladins_EGS.jpeg',
+     'Paladins EGS',
+     0,  -- Free
+     '2024-11-10',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     16),  -- Game type ID (assuming 16 for MOBA or similar genre)
+
+    ('Explore the rich fantasy world of Neverwinter, with epic dungeons and a variety of quests in this MMORPG.',
+     'Neverwinter.jpeg',
+     'Neverwinter',
+     0,  -- Free
+     '2024-09-30',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13),  -- Game type ID (assuming 13 for MMORPG)
+
+    ('Enter a whimsical world with various pets and unique gameplay mechanics in this charming game.',
+     'my-pet-hooligan.jpeg',
+     'My Pet Hooligan',
+     0,  -- Free
+     '2024-12-05',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     14),  -- Game type ID (assuming 14 for Simulation Game)
+
+    ('Embark on exciting quests and battle powerful enemies in this classic action RPG with a nostalgic feel.',
+     'grandchase.jpeg',
+     'Grand Chase',
+     0,  -- Free
+     '2024-10-25',  -- Release date
+     1,  -- Status (1 for available)
+     '1.0',
+     13); 

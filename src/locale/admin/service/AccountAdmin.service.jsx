@@ -14,11 +14,14 @@ export const loadUsers = async () => {
   if (!token) return [];
 
   try {
-    const response = await axios.get("https://websitegamemanagement.vercel.app/api/account", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      "https://websitegamemanagement.vercel.app/api/account",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -32,7 +35,7 @@ export const addAccount = async (account) => {
 
   try {
     const response = await axios.post(
-      "https://websitegamemanagement.vercel.app/account",
+      "https://websitegamemanagement.vercel.app/api/account",
       account,
       {
         headers: {
@@ -51,11 +54,14 @@ export const deleteAccount = async (id) => {
   if (!token) return;
 
   try {
-    const response = await axios.delete(`https://websitegamemanagement.vercel.app/api/account/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(
+      `https://websitegamemanagement.vercel.app/api/account/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -67,11 +73,14 @@ export const viewAccount = async (id) => {
   if (!token) return;
 
   try {
-    const response = await axios.get(`https://websitegamemanagement.vercel.app/api/account/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `https://websitegamemanagement.vercel.app/api/account/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -83,11 +92,15 @@ export const updateAccount = async (id, account) => {
   if (!token) return;
 
   try {
-    const response = await axios.put(`https://websitegamemanagement.vercel.app/api/account/${id}`, account, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.put(
+      `https://websitegamemanagement.vercel.app/api/account/${id}`,
+      account,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -99,11 +112,14 @@ export const searchAccountByUsername = async (username) => {
   if (!token) return;
 
   try {
-    const response = await axios.get(`https://websitegamemanagement.vercel.app/api/account/username/${username}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `https://websitegamemanagement.vercel.app/api/account/username/${username}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
