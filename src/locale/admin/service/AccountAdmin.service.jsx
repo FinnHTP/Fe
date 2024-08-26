@@ -1,19 +1,20 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/account";
-
-const getToken = () => {
-  return localStorage.getItem("accesstoken");
-};
-
-export const loadAccounts = async () => {
-  const token = getToken();
+export const getToken = () => {
+  const token = localStorage.getItem("accesstoken");
   if (!token) {
     console.error("Token not found");
-    return [];
+    return null;
   }
+  return token;
+};
+
+export const loadUsers = async () => {
+  const token = getToken();
+  if (!token) return [];
+
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.get("https://websitegamemanagement.vercel.app/api/account", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,36 +26,20 @@ export const loadAccounts = async () => {
   }
 };
 
-export const createAccount = async (account) => {
+export const addAccount = async (account) => {
   const token = getToken();
-  if (!token) {
-    console.error("Token not found");
-    return;
-  }
-  try {
-    const response = await axios.post(API_URL, account, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+  if (!token) return;
 
-export const updateAccount = async (id, account) => {
-  const token = getToken();
-  if (!token) {
-    console.error("Token not found");
-    return;
-  }
   try {
-    const response = await axios.put(`http://localhost:8080/api/account/${id}/accountBalance`, account, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.post(
+      "https://websitegamemanagement.vercel.app/account",
+      account,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -63,12 +48,10 @@ export const updateAccount = async (id, account) => {
 
 export const deleteAccount = async (id) => {
   const token = getToken();
-  if (!token) {
-    console.error("Token not found");
-    return;
-  }
+  if (!token) return;
+
   try {
-    const response = await axios.delete(`${API_URL}/${id}`, {
+    const response = await axios.delete(`https://websitegamemanagement.vercel.app/api/account/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -81,12 +64,10 @@ export const deleteAccount = async (id) => {
 
 export const viewAccount = async (id) => {
   const token = getToken();
-  if (!token) {
-    console.error("Token not found");
-    return null;
-  }
+  if (!token) return;
+
   try {
-    const response = await axios.get(`${API_URL}/${id}`, {
+    const response = await axios.get(`https://websitegamemanagement.vercel.app/api/account/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -94,26 +75,37 @@ export const viewAccount = async (id) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return null;
   }
 };
 
+export const updateAccount = async (id, account) => {
+  const token = getToken();
+  if (!token) return;
 
-export const getUser = async (username) => {
-    const token = getToken();
-    if (!token) {
-      console.error("Token not found");
-      return [];
-    }
-    try {
-      const response = await axios.get(`http://localhost:8080/api/account/username/${username}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
+  try {
+    const response = await axios.put(`https://websitegamemanagement.vercel.app/api/account/${id}`, account, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const searchAccountByUsername = async (username) => {
+  const token = getToken();
+  if (!token) return;
+
+  try {
+    const response = await axios.get(`https://websitegamemanagement.vercel.app/api/account/username/${username}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

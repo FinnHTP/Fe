@@ -4,7 +4,7 @@ import AccountAdminComponent from '../component/account/AccountAdmin.Component';
 const AccountPage = () => {
     return (
         <div>
-            API 
+            <AccountAdminComponent/>
         </div>
     );
 };

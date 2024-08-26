@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/games';
-const API_GAMETYPES_URL = 'http://localhost:8080/api/gametypes';
+const API_URL = 'https://websitegamemanagement.vercel.app/api/games';
+const API_GAMETYPES_URL = 'https://websitegamemanagement.vercel.app/api/gametypes';
 
 // Lấy tất cả các game
 export const getAllGames = async (token) => {
@@ -109,7 +109,7 @@ export const getGameTypes = async (token) => {
 
 
 export const getCoupons = async (token) => {
-  const response = await axios.get('http://localhost:8080/api/games/coupons', {
+  const response = await axios.get('https://websitegamemanagement.vercel.app/api/games/coupons', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -125,7 +125,7 @@ export const uploadGameImage = async (gameId, file, token) => {
 
   try {
     const response = await axios.post(
-      `http://localhost:8080/api/game/${gameId}/image`,
+      `https://websitegamemanagement.vercel.app/api/game/${gameId}/image`,
       formData,
       {
         headers: {

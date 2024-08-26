@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/rank_account";
+const API_URL = "https://websitegamemanagement.vercel.app/api/rank_account";
 
 const getToken = () => {
   return localStorage.getItem("accesstoken");

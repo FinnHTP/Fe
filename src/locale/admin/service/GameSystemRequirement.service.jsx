@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/gameSystemRequirement';
-const API_GAMES_URL = 'http://localhost:8080/api/games';
+const API_URL = 'https://websitegamemanagement.vercel.app/api/gameSystemRequirement';
+const API_GAMES_URL = 'https://websitegamemanagement.vercel.app/api/games';
 
 export const getAllGameSystemRequirements = async (token) => {
   const response = await axios.get(API_URL, {
