@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http:localhost:8080/api/games';
-const API_GAMETYPES_URL = 'http:localhost:8080/api/gametypes';
+const API_URL = 'https://websitegamemanagement.vercel.app/api/games';
+const API_GAMETYPES_URL = 'https://websitegamemanagement.vercel.app/api/gametypes';
 
 // Lấy tất cả các game
 export const getAllGames = async (token) => {
