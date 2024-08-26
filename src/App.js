@@ -1,43 +1,38 @@
+import { jwtDecode } from "jwt-decode";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import StorePage from "./locale/share/store/StorePage";
-import ProfilePage from "./locale/share/profile/ProfilePage";
-import ForumPage from "./locale/share/forum/ForumPage";
-import ContactPage from "./locale/share/contact/ContactPage";
-import CategoryPage from "./locale/share/category/CategoryPage";
 import AccountPage from "./locale/admin/account/AccountPage";
+import GamePage from "./locale/admin/game/GamePage";
 import GameSystemRequirementPage from "./locale/admin/gamesystemrequirement/GameSystemRequirementPage";
 import GroupPage from "./locale/admin/group/GroupPage";
 import KeyCodePage from "./locale/admin/keycode/KeyCodePage";
 import OrderPage from "./locale/admin/order/OrderPage";
-import ConfirmPurchase from "./locale/share/components/confirmpurchase/ConfirmPurchase.component.jsx";
 import RankAccountPage from "./locale/admin/rankaccount/RankAccountPage";
 import RolePage from "./locale/admin/role/RolePage";
-import GamePage from "./locale/admin/game/GamePage";
-import Header from "./locale/share/components/common/Header.component.jsx";
-import Footer from "./locale/share/components/common/Footer.component.jsx";
 import LoginPage from "./locale/auth/login/LoginPage.jsx";
 import RegisterPage from "./locale/auth/register/RegisterPage.jsx";
+import CategoryPage from "./locale/share/category/CategoryPage";
+import Footer from "./locale/share/components/common/Footer.component.jsx";
+import Header from "./locale/share/components/common/Header.component.jsx";
+import ConfirmPurchase from "./locale/share/components/confirmpurchase/ConfirmPurchase.component.jsx";
+import ContactPage from "./locale/share/contact/ContactPage";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
-// import GroupPageUser from "./locale/share/group/GroupPage.jsx";
 import { jwtDecode } from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
+import ForumPage from "./locale/share/forum/ForumPage";
+import GroupPageUser from "./locale/share/group/GroupPage.jsx";
+import ProfilePage from "./locale/share/profile/ProfilePage";
+import StorePage from "./locale/share/store/StorePage";
+import GameTypePage from "./locale/admin/gametype/GameTypePage";
 import BlogComponent from "./locale/share/components/group/Blog.Component";
 import BlogPublicComponent from "./locale/share/components/group/BlogPublic.Component";
-import RoleBasedRoute from "./locale/auth/services/decentralized/RoleBasedRoute";
-import UnauthorizedPage from "./locale/auth/services/decentralized/UnauthorizedPage";
-import NotFoundPage from "./locale/auth/decentralized/Page404.Component";
-import GameTypePage from "./locale/admin/gametype/GameTypePage";
-
-// import Chart from "./locale/admin/component/stat/Chart.Component";
-// import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
-// import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
-// import Toast from "./locale/share/components/common/Toast.component.jsx";
+import PrivateRoute from "./locale/auth/private/PrivateRoute.jsx";
+import UnauthorizedPage from "./locale/auth/services/decentralized/UnauthorizedPage.jsx";
 import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
-import SuccessPayment from "./locale/share/components/common/SuccessPayment.jsx";
 import FailurePayment from "./locale/share/components/common/FailurePayment.jsx";
+import SuccessPayment from "./locale/share/components/common/SuccessPayment.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,6 +41,14 @@ function App() {
 
   useEffect(() => {
     checkLogin();
+    const token = localStorage.getItem("accesstoken");
+    if (token) {
+      // Token exists, user is authenticated
+      setCheckingAuth(false);
+    } else {
+      // Token does not exist, user is not authenticated
+      setCheckingAuth(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -63,8 +66,8 @@ function App() {
       try {
         const decodedToken = jwtDecode(token);
         setIsAuthenticated(true);
-        setUserRoles(decodedToken.roles[0]);
-        console.log("Decoded Token Roles:", decodedToken.roles[0]);
+        setUserRoles(decodedToken.roles || []);
+        console.log("Decoded Token Roles:", decodedToken.roles);
       } catch (error) {
         console.error("Invalid token", error);
         setIsAuthenticated(false);
@@ -89,30 +92,76 @@ function App() {
             <main className="flex-grow">
               <Routes>
                 <Route path="/404" element={<BackUpUI />} />
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
                 {/* Shared */}
-                <Route path="/success-payment" element={<SuccessPayment />} />
-                <Route path="/failure-payment" element={<FailurePayment />} />
+                <Route
+                  path="/success-payment"
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <SuccessPayment />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/failure-payment"
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <FailurePayment />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<StorePage />} />
                 <Route path="/store" element={<StorePage />} />
-                <Route path="/profile/*" element={<ProfilePage />} />
+                <Route
+                  path="/profile/*"
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <ProfilePage />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path="/forum" element={<ForumPage />} />
-                <Route path="/blogs/public" element={<BlogPublicComponent/>} />
+                <Route path="/blogs/public" element={<BlogPublicComponent />} />
                 {/* <Route path="/group" element={<GroupPageUser />} /> */}
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<DetailPage />} />
-                <Route path="/blogs/group/:groupId" element={<BlogComponent />} />
-            <Route path="/commentblog/blog/:id" element={<BlogComponent />} />
-                <Route path="/confirm-purchase" element={<ConfirmPurchase />} />
+                <Route
+                  path="/blogs/group/:groupId"
+                  element={<BlogComponent />}
+                />
+                <Route
+                  path="/commentblog/blog/:id"
+                  element={<BlogComponent />}
+                />
+                <Route
+                  path="/confirm-purchase"
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <ConfirmPurchase />
+                    </PrivateRoute>
+                  }
+                />
                 <Route
                   path="/confirm-purchase/:id"
-                  element={<ConfirmPurchase />}
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <ConfirmPurchase />
+                    </PrivateRoute>
+                  }
                 />
 
                 {/* Admin */}
-                <Route path="/api/game" element={<GamePage />} />
+                <Route
+                  path="/api/game"
+                  element={
+                    <PrivateRoute allowedRoles={["ADMIN"]}>
+                      <GamePage />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path="/api/account" element={<AccountPage />} />
                 <Route
                   path="/api/gamesystem"
@@ -124,7 +173,6 @@ function App() {
                 <Route path="/api/rankaccount" element={<RankAccountPage />} />
                 <Route path="/api/role" element={<RolePage />} />
                 <Route path="/api/gametype" element={<GameTypePage />} />
-
 
                 {/* Partner */}
                 <Route path="/pt/game" element={<RolePage />} />
