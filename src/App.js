@@ -19,7 +19,7 @@ import Footer from "./locale/share/components/common/Footer.component.jsx";
 import LoginPage from "./locale/auth/login/LoginPage.jsx";
 import RegisterPage from "./locale/auth/register/RegisterPage.jsx";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
-import GroupPageUser from "./locale/share/group/GroupPage.jsx";
+// import GroupPageUser from "./locale/share/group/GroupPage.jsx";
 import { jwtDecode } from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
@@ -95,7 +95,7 @@ function App() {
                 <Route path="/profile/*" element={<ProfilePage />} />
                 <Route path="/forum" element={<ForumPage />} />
                 <Route path="/blogs/public" element={<BlogPublicComponent/>} />
-                <Route path="/group" element={<GroupPageUser />} />
+                {/* <Route path="/group" element={<GroupPageUser />} /> */}
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<DetailPage />} />
