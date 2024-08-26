@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/gametypes';
+const API_URL = 'https://websitegamemanagement.vercel.app/api/gametypes';
 
 export const getAllGameTypes = async (token) => {
   const response = await axios.get(API_URL, {

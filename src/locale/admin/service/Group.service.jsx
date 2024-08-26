@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/group";
+const API_URL = "https://websitegamemanagement.vercel.app/api/group";
 
 export const getToken = () => {
   return localStorage.getItem("accesstoken");

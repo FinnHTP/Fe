@@ -1,7 +1,7 @@
 import React from "react";
-import GroupComponent from "../../share/components/group/Group.component";
+import GroupComponent from "../components/group/Group.Component.jsx";
 
-const GroupPage = () => {
+const GroupPageUser = () => {
   return (
     <div>
       <GroupComponent />
@@ -9,4 +9,4 @@ const GroupPage = () => {
   );
 };
 
-export default GroupPage;
+export default GroupPageUser;

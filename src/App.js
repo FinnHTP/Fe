@@ -18,15 +18,16 @@ import Header from "./locale/share/components/common/Header.component.jsx";
 import ConfirmPurchase from "./locale/share/components/confirmpurchase/ConfirmPurchase.component.jsx";
 import ContactPage from "./locale/share/contact/ContactPage";
 import DetailPage from "./locale/share/detail/DetailPage.jsx";
+import { jwtDecode } from "jwt-decode";
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import ForumPage from "./locale/share/forum/ForumPage";
 import GroupPageUser from "./locale/share/group/GroupPage.jsx";
 import ProfilePage from "./locale/share/profile/ProfilePage";
 import StorePage from "./locale/share/store/StorePage";
-
 import GameTypePage from "./locale/admin/gametype/GameTypePage";
 import BlogComponent from "./locale/share/components/group/Blog.Component";
 import BlogPublicComponent from "./locale/share/components/group/BlogPublic.Component";
-
 import PrivateRoute from "./locale/auth/private/PrivateRoute.jsx";
 import UnauthorizedPage from "./locale/auth/services/decentralized/UnauthorizedPage.jsx";
 import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
@@ -123,7 +124,7 @@ function App() {
                 />
                 <Route path="/forum" element={<ForumPage />} />
                 <Route path="/blogs/public" element={<BlogPublicComponent />} />
-                <Route path="/group" element={<GroupPageUser />} />
+                {/* <Route path="/group" element={<GroupPageUser />} /> */}
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<DetailPage />} />
