@@ -24,7 +24,6 @@ import { jwtDecode } from "jwt-decode";
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
-import GroupComponent from "./locale/share/components/group/Group.component";
 import BlogComponent from "./locale/share/components/group/Blog.Component";
 import BlogPublicComponent from "./locale/share/components/group/BlogPublic.Component";
 import RoleBasedRoute from "./locale/auth/services/decentralized/RoleBasedRoute";

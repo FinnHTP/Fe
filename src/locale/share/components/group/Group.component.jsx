@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  getAvatar,
   listAllGroups,
   searchGroups,
   joinGroup,
@@ -21,27 +22,7 @@ const GroupComponent = () => {
   const [newGroupImage, setNewGroupImage] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("accesstoken");
-
-      if (!token) {
-        console.error("Không có token được tìm thấy");
-        return;
-      }
-
-      try {
-        const groupsData = await listAllGroups(token);
-        setGroups(groupsData);
-
-        await loadBlogs(groupsData, token);
-      } catch (error) {
-        console.error("Error loading data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+ 
 
   const loadBlogs = async (groupsData, token) => {
     if (groupsData.length > 0) {
@@ -128,6 +109,18 @@ const GroupComponent = () => {
     }
   };
 
+  const handleGetAvatar = async () => {
+    const token = localStorage.getItem("accesstoken");
+    try{
+      const result = await getAvatar(token);
+      console.log("Avatar User: " + result);
+
+
+    }catch(error){
+      console.error(error);
+    }
+  }
+
   const handleShowModal = () => {
     setNewGroupName("");
     setNewGroupImage(null);
@@ -136,17 +129,30 @@ const GroupComponent = () => {
   };
 
   const handleCloseModal = () => setShowModal(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("accesstoken");
 
+      if (!token) {
+        console.error("Không có token được tìm thấy");
+        return;
+      }
+
+      try {
+        const groupsData = await listAllGroups(token);
+        setGroups(groupsData);
+
+        await loadBlogs(groupsData, token);
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
+    };
+
+    fetchData();
+    handleGetAvatar();
+  }, []);
   return (
     <div>
-      <section className="page-info-section set-bg">
-        <div className="pi-content">
-          <div className="container">
-            <div className="row">
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="page-section recent-game-page spad">
         <div className="container">
@@ -191,15 +197,6 @@ const GroupComponent = () => {
                       </div>
 
                       <div className="mb-4">
-                        <label className="block text-gray-700">Ảnh đại diện</label>
-                        <input
-                          type="file"
-                          onChange={(e) => setNewGroupImage(e.target.files[0])}
-                          className="w-full px-4 py-2 border rounded-md"
-                        />
-                      </div>
-
-                      <div className="mb-4">
                         <label className="block text-gray-700">Public</label>
                         <input
                           type="checkbox"
@@ -238,19 +235,21 @@ const GroupComponent = () => {
                 {groups.length > 0 ? (
                   groups.map((group) => (
                     <div className="p-6 bg-gray-800 rounded-lg shadow-md" key={group.id}>
-                      <div className="flex items-center">
+                      <div className="items-center">
                         <img
-                          src={`/image/games/${group.image}`} 
+                          src="https://i.ytimg.com/vi/uZC-5D2nk9A/maxresdefault.jpg" 
                           alt="Group Avatar"
-                          className="w-24 h-24 rounded-lg"
-                        />
+                          className="w-full h-auto rounded-lg"
+                        />  
                         <div className="ml-6">
                           <h1 className="text-white text-2xl font-semibold">
                             Nhóm: {group.name}
                           </h1>
+
                           <p className="text-gray-400 text-sm">
                             Ngày tạo: {group.createDate}
                           </p>
+                          {/* {images.map((image))} */}
                           <div className="flex items-center mt-2">
                             <div className="text-gray-200 mt-2">
                               Có {newBlogsToday[group.id]} bài viết mới hôm nay
