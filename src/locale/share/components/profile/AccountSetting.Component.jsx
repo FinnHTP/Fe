@@ -209,7 +209,7 @@ const AccountSetting = () => {
                         />
                         <button
                           className="mt-4 bg-[#06193C] hover:bg-[#06193C] text-white text-lg font-bold py-2 px-4 rounded w-full"
-                          onClick={handleClick}
+                          onClick={() => handleRecharge(deposit)}
                         >
                           Payment
                         </button>
