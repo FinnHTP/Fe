@@ -69,10 +69,23 @@ const AccountSetting = () => {
   };
 
   const handleRecharge = async (amount) => {
+    const token = localStorage.getItem("accesstoken");
+    const userName = localStorage.getItem("username"); // Thay thế bằng tên người dùng thực tế
+
     try {
       if (token) {
-        const responseUrl = await recharge(amount, token);
-        window.location.href = responseUrl;
+        // Lấy thông tin tài khoản dựa trên username
+        const account = await getAccountbyUsername(token, userName);
+
+        if (account && account.id) {
+          const accountId = account.id;
+
+          // Gọi hàm recharge với accountId và amount
+          await recharge(amount, accountId);
+        } else {
+          console.error("Account information is not available");
+          alert("Failed to retrieve account information.");
+        }
       }
     } catch (error) {
       console.error("Failed to recharge:", error);

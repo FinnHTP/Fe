@@ -37,6 +37,8 @@ import ChartDetail from "./locale/admin/component/stat/ChartDetail.Component";
 import GroupAdminComponent from "./locale/admin/component/group/GroupAdmin.Component";
 import Toast from "./locale/share/components/common/Toast.component.jsx";
 import BackUpUI from "./locale/share/components/common/BackupUI.jsx";
+import SuccessPayment from "./locale/share/components/common/SuccessPayment.jsx";
+import FailurePayment from "./locale/share/components/common/FailurePayment.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -89,6 +91,8 @@ function App() {
               <Routes>
                 <Route path="/404" element={<BackUpUI />} />
                 {/* Shared */}
+                <Route path="/success-payment" element={<SuccessPayment />} />
+                <Route path="/failure-payment" element={<FailurePayment />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<StorePage />} />

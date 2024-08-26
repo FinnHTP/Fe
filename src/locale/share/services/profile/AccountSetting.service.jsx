@@ -77,45 +77,39 @@ export const getAvatar = async (accountId) => {
   }
 };
 
-export const recharge = async (amount, token) => {
-  try {
-    const decoded = jwtDecode(token);
-    const accountId = decoded.id;
-    const paymentValues = {
-      amount: amount,
-      accountId: accountId,
-    };
+export const recharge = async (amount, accountId) => {
+  const token = localStorage.getItem("accesstoken");
 
-    const queryString = new URLSearchParams(paymentValues).toString();
+  try {
     const response = await axios.post(
-      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/payment/create?${queryString}`,
-      {},
+      `http://localhost:8080/paypal/payment/create`,
+      null,
       {
+        params: {
+          accountId: accountId, // Truyền accountId vào request
+          method: "paypal",
+          amount: amount,
+          currency: "USD",
+          description: "Mô tả sản phẩm hoặc dịch vụ",
+        },
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    if (response.status === 200) {
-      const responseUrl = response.data.data;
-      window.location.href = responseUrl;
-      console.log(responseUrl);
-      const resultPayment = await axios.post(
-        `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/payment/save-payment?${queryString}`,
+    const approvalUrl = response.data;
 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    if (approvalUrl && approvalUrl !== "error") {
+      // Chuyển hướng đến URL của PayPal
+      window.location.href = approvalUrl;
+    } else {
+      alert("There was an error creating the payment. Please try again.");
     }
-
-    return response.data.data;
   } catch (error) {
-    console.error("Error recharging account:", error);
-    throw error;
+    console.error("Payment creation failed:", error);
+    alert("There was an error processing your payment.");
   }
 };
 
