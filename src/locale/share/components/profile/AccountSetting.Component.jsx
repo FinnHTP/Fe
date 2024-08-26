@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   findAccountById,
   findUserById,
+  getAccountbyUsername,
   getAvatar,
   recharge,
   updateAccount,
