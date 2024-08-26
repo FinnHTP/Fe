@@ -1,12 +1,12 @@
-// import React from "react";
-// import GroupComponent from "../../share/components/group/Group.component";
+import React from "react";
+import GroupComponent from "../../share/components/group/Group.component";
 
-// const GroupPage = () => {
-//   return (
-//     <div>
-//       <GroupComponent />
-//     </div>
-//   );
-// };
+const GroupPage = () => {
+  return (
+    <div>
+      <GroupComponent />
+    </div>
+  );
+};
 
-// export default GroupPage;
+export default GroupPage;
