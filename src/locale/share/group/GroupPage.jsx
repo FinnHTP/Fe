@@ -1,5 +1,5 @@
 import React from "react";
-import GroupComponent from "../../share/components/group/Group.component";
+import GroupComponent from "../components/group/Group.Component";
 
 const GroupPage = () => {
   return (
