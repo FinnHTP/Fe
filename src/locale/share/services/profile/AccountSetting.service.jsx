@@ -82,7 +82,7 @@ export const recharge = async (amount, accountId) => {
 
   try {
     const response = await axios.post(
-      `http://localhost:8080/paypal/payment/create`,
+      `https://steam-gamemanagement-75086cac80ca.herokuapp.com/paypal/payment/create`,
       null,
       {
         params: {
