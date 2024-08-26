@@ -517,59 +517,65 @@ const GameComponent = () => {
             </tr>
           </thead>
           <tbody className="border-none bg-customBgBtnCarouselActive">
-            {currentItems.map((game, index) => {
-              const isExpanded = expandedGameIds.includes(game.id);
-              const descriptionToShow = isExpanded
-                ? game.description
-                : `${game.description.slice(0, 20)}...`;
+          {Array.isArray(currentItems) && currentItems.length > 0 ? (
+  currentItems.map((game, index) => {
+    const isExpanded = expandedGameIds.includes(game.id);
+    const descriptionToShow = isExpanded
+      ? game.description
+      : `${game.description.slice(0, 20)}...`;
 
-              return (
-                <tr key={game.id}>
-                  <td className="border-r border-customTypeEdition px-4">
-                    {indexOfFirstItem + index + 1}
-                  </td>
-                  <td className="border-r border-customTypeEdition px-4">{game.name}</td>
-                  <td className="border-r border-customTypeEdition px-4">
-                    {descriptionToShow}{' '}
-                    <span
-                      className="text-blue-400 cursor-pointer"
-                      onClick={() => handleToggleDescription(game.id)}
-                    >
-                      {isExpanded ? 'Show Less' : 'Show More'}
-                    </span>
-                  </td>
-                  <td className="border-r border-customTypeEdition px-4">{game.priceGame}</td>
-                  <td className="border-r border-customTypeEdition px-4">
-                    {game.status ? (
-                      <span className="text-green-400 font-medium">In Stock</span>
-                    ) : (
-                      'Sold Out'
-                    )}
-                  </td>
-                  <td className="border-r border-customTypeEdition px-4">
-                    {formatDate(game.releaseDate)}
-                  </td>
-                  <td className="border-r border-customTypeEdition px-4">{game.version}</td>
-                  <td className="flex items-center justify-center px-4">
-                    <div className="flex flex-col md:flex-row items-center justify-center space-x-2">
-                      <button
-                        className="w-12 h-12 flex items-center justify-center text-white rounded bg-transparent"
-                        onClick={() => handleEdit(game)}
-                      >
-                        <img src="/image/icons/pencil.png" alt="Edit" className="w-8 h-8" />
-                      </button>
-                      <button
-                        className="w-12 h-12 flex items-center justify-center text-white rounded bg-transparent"
-                        onClick={() => handleDelete(game.id)}
-                      >
-                        <img src="/image/icons/delete.png" alt="Delete" className="w-8 h-8" />
-                      </button>
-                    </div>
-                  </td>
+    return (
+      <tr key={game.id}>
+        <td className="border-r border-customTypeEdition px-4">
+          {indexOfFirstItem + index + 1}
+        </td>
+        <td className="border-r border-customTypeEdition px-4">{game.name}</td>
+        <td className="border-r border-customTypeEdition px-4">
+          {descriptionToShow}{' '}
+          <span
+            className="text-blue-400 cursor-pointer"
+            onClick={() => handleToggleDescription(game.id)}
+          >
+            {isExpanded ? 'Show Less' : 'Show More'}
+          </span>
+        </td>
+        <td className="border-r border-customTypeEdition px-4">{game.priceGame}</td>
+        <td className="border-r border-customTypeEdition px-4">
+          {game.status ? (
+            <span className="text-green-400 font-medium">In Stock</span>
+          ) : (
+            'Sold Out'
+          )}
+        </td>
+        <td className="border-r border-customTypeEdition px-4">
+          {formatDate(game.releaseDate)}
+        </td>
+        <td className="border-r border-customTypeEdition px-4">{game.version}</td>
+        <td className="flex items-center justify-center px-4">
+          <div className="flex flex-col md:flex-row items-center justify-center space-x-2">
+            <button
+              className="w-12 h-12 flex items-center justify-center text-white rounded bg-transparent"
+              onClick={() => handleEdit(game)}
+            >
+              <img src="/image/icons/pencil.png" alt="Edit" className="w-8 h-8" />
+            </button>
+            <button
+              className="w-12 h-12 flex items-center justify-center text-white rounded bg-transparent"
+              onClick={() => handleDelete(game.id)}
+            >
+              <img src="/image/icons/delete.png" alt="Delete" className="w-8 h-8" />
+            </button>
+          </div>
+        </td>
+      </tr>
+    );
+  })
+) : (
+  <tr>
+    <td colSpan="8">No games available</td>
+  </tr>
+)}
 
-                </tr>
-              );
-            })}
           </tbody>
         </table>
 

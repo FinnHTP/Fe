@@ -50,7 +50,7 @@ const NavbarAdminComponent = () => {
                 Game
               </Link>
               <Link
-                to="/api/gametypes"
+                to="/api/gametype"
                 className="block px-4 py-2 hover:bg-gray-700 transition-all duration-200"
               >
                 GameTypes
