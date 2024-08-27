@@ -14,12 +14,13 @@ const Filter = ({ onPriceChange }) => {
     <div className="max-w-md mx-auto mt-10">
       <div className="flex flex-wrap items-center justify-between mx-10">
         <p className="text-white">Filter</p>
-        <p
+        <a
           className="text-cyan-600 cursor-pointer"
           onClick={() => onPriceChange([0, 1000000])}
+          href="/category"
         >
           Reset
-        </p>
+        </a>
       </div>
       <div>
         <Accordion />
