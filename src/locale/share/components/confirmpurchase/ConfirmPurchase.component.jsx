@@ -30,8 +30,8 @@ const ConfirmPurchase = () => {
     <div>
       <div className="flex flex-wrap gap-3">
         <div className="w-2/3">
-          {/* <InformationProduct id={id} /> */}
-          <PrintInvoicing />
+          <InformationProduct id={id} />
+{/*           <PrintInvoicing /> */}
         </div>
         <div className="w-1/4">
           <div className="bg-customBgFreeGames2 p-2">
