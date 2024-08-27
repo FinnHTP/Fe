@@ -27,18 +27,18 @@ const PrintInvoicing = () => {
         );
         const accountId = responseAccount.data.id;
         console.log("Account Id: ", accountId);
-        const gameId = game.id;
+        setGameId(id);
         console.log("Game Id: ", gameId);
         const price = game.priceGame;
         console.log("Price Game: ", price);
-        const order = { accountId, gameId, price };
+        const order = { accountId: accountId, gameId: gameId, price: price };
 
         if (!token) {
           throw new Error("Token Not Found");
         }
 
         const response = await axios.post(
-          `https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/bill`,
+          "https://steam-gamemanagement-75086cac80ca.herokuapp.com/api/orders/export", // Sửa lại URL
           order,
           {
             headers: {
@@ -47,6 +47,7 @@ const PrintInvoicing = () => {
             },
           }
         );
+
         console.log(response.status);
       } catch (error) {
         console.error("Fail Error:", error);
