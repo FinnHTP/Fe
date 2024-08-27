@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   findAccountById,
   findUserById,
@@ -8,9 +8,11 @@ import {
   updateAccount,
   uploadAvatar,
 } from "../../services/profile/AccountSetting.service";
+import { NotificationContext } from "../common/NotificationContext";
 
 const AccountSetting = () => {
   const [user, setUser] = useState({});
+  const { openNotification } = useContext(NotificationContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [sdt, setSdt] = useState("");
@@ -60,11 +62,27 @@ const AccountSetting = () => {
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
     try {
-      const userData = { firstname: firstName, lastname: lastName, sdt: sdt };
+      const userData = {
+        firstname: firstName,
+        lastname: lastName,
+        sdt: sdt,
+        address: address,
+      };
+
       await updateAccount(userData, token);
       setUser({ ...user, ...userData });
+      openNotification({
+        message: "Update account successfully",
+        type: "success",
+        title: "SUCCESS",
+      });
     } catch (error) {
       console.error("Failed to update account:", error);
+      openNotification({
+        message: "Update account fail",
+        type: "error",
+        title: "ERROR",
+      });
     }
   };
 

@@ -2,11 +2,13 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { findAccountById } from "../../services/profile/AccountSetting.service";
 
 const Header = () => {
   const navigate = useNavigate();
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [accountId, setAccountId] = useState(1);
+  const [account, setAccount] = useState({});
   const [isLogin, SetIsLogin] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const handleUpload = async () => {
@@ -46,8 +48,10 @@ const Header = () => {
   };
   const handleGetAvatar = async () => {
     const token = localStorage.getItem("accesstoken");
-    const url = await getAvatar(accountId, token);
-    setAvatarUrl(url);
+    const accountData = await findAccountById(token);
+    setAccount(accountData);
+    const avatarUrl = await getAvatar(accountData.id);
+    setAvatarUrl(avatarUrl);
   };
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
