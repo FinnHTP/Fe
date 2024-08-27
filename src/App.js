@@ -112,6 +112,14 @@ function App() {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<StorePage />} />
                 <Route path="/store" element={<StorePage />} />
+                  <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute allowedRoles={["USER"]}>
+                      <ProfilePage />
+                    </PrivateRoute>
+                  }
+                />
                 <Route
                   path="/profile/*"
                   element={
